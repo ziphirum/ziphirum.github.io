@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ page.title }}</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+		<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet" type="text/css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+		<div id="top-bar"></div> <!-- 10 gray pixels from top -->  	
+		<div class="wrapper container_12"><!-- Main wrapper of page -->  	  	
+		<header class="header"> <!-- Header (Logo + Navigation) -->
+			
+		<div class="logo grid_4 push_4"><!-- Logo -->
+		<!--<a href="index.html"><img src="img/logo.png" alt="logo" width="300" height="35" /></a>-->
+		<center><span class="logo-text">PETCH</span></center>
+		</div>
+		<div class="hr-940px grid_12 "></div> <!-- Gray 1px separator -->
+        <div class="site">
+          <!--<div class="header">
+            <h1 class="title"><a href="/">{{ site.name }}</a></h1>
+          </div>-->
+
+          {{ content }}
+
+          <div class="footer">
+            	<!-- Copyright area -->
+				<div  class="container_12 clearfix" >
+				<p id="copyrights-footer" class="grid_12">© Copyright 2013 Petzh. All Rights Reserved</p>
+				</div>
+				<!--
+            <div class="contact">
+              <p>
+                <a href="https://github.com/yourusername">github.com/yourusername</a><br />
+                <a href="https://twitter.com/yourusername">twitter.com/yourusername</a><br />
+              </p>
+            </div>
+			-->
+          </div>
+        </div>
+
+    </body>
+</html>

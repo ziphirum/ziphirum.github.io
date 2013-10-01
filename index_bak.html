@@ -1,0 +1,48 @@
+---
+layout: default
+title: Your New Jekyll Site
+---
+
+<div class="main_content">
+ 	<div id="best_work">
+		<div class="best_work">
+    <!-- <h3>Our best work</h3> -->
+
+			{% for post in site.posts %}
+				<div {% cycle '','','class="last_img"' %}>
+		    		<a class="transition" href="{{ post.url }}"><img alt="" src="{{ post.thumbnail }}" /></a>
+		        	<a class="transition" href="{{ post.url }}"><img alt="" class="view" src="img/linz.png" /></a>
+		        	<p>{{ post.date | date_to_string }}<img class="work_platform" src="{{ post.platform }}" height="30"/></p>
+	    		</div>
+			{% endfor %}
+    
+    	</div>
+    
+	</div>
+
+<!-- How to Contact Us, What we do -->
+
+	<div id="info">
+
+	    <div class="info_item float">
+	        <h3>Need Freelance ?</h3>
+	        <p>Need freelance mobile app developer, find out more or contact me at</p>
+	        <br/>
+	        <span style="margin: 0 20px 0 0; line-height: 30px"><a class="transitional" href="mailto:zoonref@gmail.com">mail</a></span>
+	        <span style="margin: 0 20px 0 0; line-height: 30px" ><a class="transitional" href="http://www.facebook.com/zoonref">facebook</a></span>
+	        <span style="margin: 0 20px 0 0; line-height: 30px"><a class="transitional" href="http://www.twitter.com/zoonref">twitter</a></span>
+	        <span style="margin: 0 20px 0 0; line-height: 30px"><a class="transitional" href="http://th.linkedin.com/in/zoonref">linkedin</a></span>
+	        <span style="margin: 0 20px 0 0; line-height: 30px"><a class="transitional" href="skype:nobisuke.eiei?chat">skype</a></span>
+	        <span style="margin: 0 20px 0 0; line-height: 30px"><a class="transitional" href="http://www.github.com/zoonooz">github</a></span>
+	    </div>
+	    
+
+	    <div class="info_item">
+	        <h3>About me</h3>
+	        <img src="img/zoonooz.png" width="100" style="float: left; margin : 10px 10px 10px 0"/>
+	        <p >I am an experienced mobile applications developer. I like to develop application especially in mobile. I can develop Android, iOS and Windows Phone application. I also like to learn about mobile related technology such as NFC and I love to design User interface too.</p>      
+    	</div>
+
+	    
+	</div>
+</div>
