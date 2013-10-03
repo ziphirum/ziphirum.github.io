@@ -29,6 +29,36 @@ title: Captured by. Chanavee Chunhasri
 </head>
 
 <body> 
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+	   FB.init({
+		   status: true, // check login status
+		   cookie: true, // enable cookies to allow the server to access the session
+		   xfbml: true  // parse XFBML
+	   });
+	  
+    FB.Event.subscribe('edge.create', function(response) {
+      console.log(response);
+      alert('Thanks for liking!');
+    });
+ 
+    FB.Event.subscribe('edge.remove', function(response) {
+      console.log(response);
+      alert('Sad to see you dont like me :(');
+    });
+  };
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
 	
   	<!-- Slider of the home page -->
   	<div class="nivo-sider-wrapper grid_12 clearfix">
@@ -72,6 +102,9 @@ title: Captured by. Chanavee Chunhasri
 			<h3 class="important">Chanavee Chunhasri (Petch)</h3>
 			<p><span class="important">Skills : </span>Java, Hibernate, Spring, Football, Basketball, Photographer, Invisible, Stun, Earth stomp, God's strength</p>
 			<p><span class="important">Exp : </span>99%</p>
+			<!-- <p>
+				<div class="fb-like-box" data-href="https://www.facebook.com/pixellaa" data-width="292" data-height="The height of the plugin in pixels (optional)." data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="false" data-show-border="false"></div>
+			</p> -->
 		</div>
 		
 		<div class="grid_3">
@@ -176,46 +209,7 @@ title: Captured by. Chanavee Chunhasri
   <!-- Quicksand(portfolio filtering) -->
 	<script type="text/javascript" src="js/jquery.quicksand.js"></script>
 	<script type="text/javascript" src="js/jquery.easing.js"></script>
-  
-  <!-- Twitter -->
-  <script type="text/javascript" src="js/jquery.tweet.js"></script>
-  <script type='text/javascript'>
-    $(document).ready(function(){
-        $(".tweet").tweet({
-            username: "ImIthi",
-            outro_text: false,
-            avatar_size: false,
-            count: 2,
-            loading_text: "Loading tweets..."
-        });
-    });
-  </script>
-  
-  <!-- Dribbble -->
-  <script type="text/javascript" src="js/jquery.jribbble-0.11.0.js"></script>
-  <script type="text/javascript">
-	$(document).ready(function (){
-	$.jribbble.getShotsThatPlayerFollows('Ithi',
-			function (followedShots)
-			{
-				var html = [];
-				$.each(followedShots.shots, function (i, shot)
-				{
-					html.push('<li class="dribbble-item">');
-					html.push('<a href="' + shot.url + '">');
-					html.push('<img class="dribbble-shot link-img" src="' + shot.image_teaser_url + '" ');
-					html.push('alt="' + shot.title + '">');
-					html.push('</a>');
-					html.push('</li>');
-				});
-				
-				$('#shotsPlayerFollows').html(html.join(''));
-			},
-			{page: 1, per_page: 8}
-		);}
-	);
-  </script>  
-  
+    
   <!-- General scripts  -->
   <script src="js/script.js"></script>
   
