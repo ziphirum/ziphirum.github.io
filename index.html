@@ -1,65 +1,9 @@
 ---
 layout: default
-title: Captured by. Chanavee Chunhasri
+title: Petch's
 ---
 
-<head>
-  <meta charset="utf-8">
-  <title>Clocker</title>
-  <meta name="description" content="HTML/CSS theme created for themeforest.net">
-  <meta name="author" content="Ithi">
-
-  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Place favicon.ico in the root of your domain and delete these references -->
-  <link rel="shortcut icon" href="/favicon.ico">
-
-  <!-- CSS: implied media="all" -->    
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <link rel="stylesheet" href="css/960_12_col.css">
-  
-  <!-- Help fixing for IE browsers -->
-  <!--[if lt IE 9]>
-  <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
-  <![endif]-->
-  
-  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-   <script src="js/libs/modernizr-1.7.min.js"></script>
-</head>
-
 <body> 
-<div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-	   FB.init({
-		   status: true, // check login status
-		   cookie: true, // enable cookies to allow the server to access the session
-		   xfbml: true  // parse XFBML
-	   });
-	  
-    FB.Event.subscribe('edge.create', function(response) {
-      console.log(response);
-      alert('Thanks for liking!');
-    });
- 
-    FB.Event.subscribe('edge.remove', function(response) {
-      console.log(response);
-      alert('Sad to see you dont like me :(');
-    });
-  };
-
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-
-
-	
   	<!-- Slider of the home page -->
   	<div class="nivo-sider-wrapper grid_12 clearfix">
   	<div id="nivo-slider" class="nivoSlider">
@@ -82,15 +26,11 @@ title: Captured by. Chanavee Chunhasri
 	
 	
 		<!-- Four columns created with 4xgrid_3 class -->
-		
-		
-				{% for post in site.posts %}
+				{% for post in site.posts limit:4 %}
 					<div class='grid_3'>
 						<h4>{{ post.title }}</h4>
 						<p>{{ post.detail }}</p>
-						<!-- <a class="transition" href="{{ post.url }}"><img alt="" src="{{ post.thumbnail }}" /></a>
-						<a class="transition" href="{{ post.url }}"><img alt="" class="view" src="img/linz.png" /></a>
-						<p>{{ post.date | date_to_string }}<img class="work_platform" src="{{ post.platform }}" height="30"/></p> -->
+						<p>{{ post.date | date_to_string }}<img class="work_platform" src="{{ post.platform }}" height="30"/></p>
 					</div>
 				{% endfor %}
 			
@@ -102,9 +42,6 @@ title: Captured by. Chanavee Chunhasri
 			<h3 class="important">Chanavee Chunhasri (Petch)</h3>
 			<p><span class="important">Skills : </span>Java, Hibernate, Spring, Football, Basketball, Photographer, Invisible, Stun, Earth stomp, God's strength</p>
 			<p><span class="important">Exp : </span>99%</p>
-			<!-- <p>
-				<div class="fb-like-box" data-href="https://www.facebook.com/pixellaa" data-width="292" data-height="The height of the plugin in pixels (optional)." data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="false" data-show-border="false"></div>
-			</p> -->
 		</div>
 		
 		<div class="grid_3">
@@ -129,33 +66,6 @@ title: Captured by. Chanavee Chunhasri
 	<div id="footer-wrapper" class="clearfix"><!-- Footer wrapper starts here -->
 	<footer class="container_12"> <!-- Container -->
 		
-		<!-- Twitter widget -->	
-		<!--
-		<div class="twitter-footer grid_4">	
-			<h5 class="important">Twitter</h5>
-			<div class="tweet"></div>
-			<a href="http://twitter.com/#!/envato" >Follow on Twitter →</a>
-		</div>
-		-->
-		<!-- Dribbble widget -->
-		<!--
-		<div class="dribbble-footer grid_4">
-			<h5 class="important">Dribbble</h5>
-			<ul id="shotsPlayerFollows" class="teaser-list"></ul>
-			<a href="http://dribbble.com/Ithi">Follow on Dribbble →</a>
-		</div>
-		-->
-		<!-- Subscribe widget -->
-		<!--
-		<div class="subscribe grid_4" >
-		<h5 class="important">Mailing list</h5>
-		<p>Aliquam id dolor nibh, vitae porttitor erat. Duis in turpis elit, nec facilisis mauris. Donec at massa risus.s</p>
-			<form id="subscribe-form" action="#">
-				<input id="email" type="text" title="e-mail" value="example@mail.com" />
-				<input id="footer-btn" type="button" title="Subscribe" value="Subscribe" />				
-			</form>
-		</div>
-		-->
 	</footer><!-- End of container -->
 	</div><!-- End of wrapper -->
 	
@@ -228,4 +138,3 @@ title: Captured by. Chanavee Chunhasri
   </script>
 
 </body>
-</html>
