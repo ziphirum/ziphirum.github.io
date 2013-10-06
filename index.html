@@ -6,15 +6,15 @@ title: Petch's
 <body> 
   	<!-- Slider of the home page -->
   	<div class="nivo-sider-wrapper grid_12 clearfix">
-  	<div id="nivo-slider" class="nivoSlider">
-  		<img src="img/placeholders/slider-1.png" alt="slider" width="940" height="350" title="#bridge1"/>
-  		<img src="img/placeholders/slider-2.png" alt="slider" width="940" height="350" title="#htmlcaption" />
-  		<img src="img/placeholders/slider-3.png" alt="slider" width="940" height="350" />
-  	</div>
-	
-  	<div id="bridge1" class="nivo-html-caption">
-		Sunset at Rama-8 bridge.
-	</div>
+	  	<div id="nivo-slider" class="nivoSlider">
+	  		<img src="img/placeholders/slider-1.png" alt="slider" width="940" height="350" title="#bridge1"/>
+	  		<img src="img/placeholders/slider-2.png" alt="slider" width="940" height="350" title="#htmlcaption" />
+	  		<img src="img/placeholders/slider-3.png" alt="slider" width="940" height="350" />
+	  	</div>
+		
+	  	<div id="bridge1" class="nivo-html-caption">
+			Sunset at Rama-8 bridge.
+		</div>
   	</div>
 	<!-- End of slider wrapper -->	
 		
@@ -23,21 +23,18 @@ title: Petch's
 
 	<!-- Main content of the page starts here -->
 	<div id="page-content" class="clearfix">
-	
-	
 		<!-- Four columns created with 4xgrid_3 class -->
-				{% for post in site.posts limit:4 %}
-					<div class='grid_3'>
-						<h4>{{ post.title }}</h4>
-						<p>{{ post.detail }}</p>
-						<p>{{ post.date | date_to_string }}<img class="work_platform" src="{{ post.platform }}" height="30"/></p>
-					</div>
-				{% endfor %}
+		{% for post in site.posts limit:4 %}
+			<div class='grid_3'>
+				<h4>{{ post.title }}</h4>
+				<p>{{ post.detail }}</p>
+				<p>{{ post.date | date_to_string }}<img class="work_platform" src="{{ post.platform }}" height="30"/></p>
+			</div>
+		{% endfor %}
 			
 		<div class="hr-940px grid_12"><div class="hr-460px"></div></div><!-- Gray 1px separator + 3px blue separator
 		
 		<!-- Full width important paragraph with two images -->
-		
 		<div class="grid_6">
 			<h3 class="important">Chanavee Chunhasri (Petch)</h3>
 			<p><span class="important">Skills : </span>Java, Hibernate, Spring, Football, Basketball, Photographer, Invisible, Stun, Earth stomp, God's strength</p>
@@ -58,15 +55,11 @@ title: Petch's
 	
 	<div class="hr-940px grid_12 clearfix"></div><!-- 1px gray separator -->
 	
-	</div><!-- End of main page wrapper -->
-	
-	
 	<!-- Footer starts here -->	
-
 	<div id="footer-wrapper" class="clearfix"><!-- Footer wrapper starts here -->
-	<footer class="container_12"> <!-- Container -->
-		
-	</footer><!-- End of container -->
+		<footer class="container_12"> <!-- Container -->
+			
+		</footer><!-- End of container -->
 	</div><!-- End of wrapper -->
 	
 
