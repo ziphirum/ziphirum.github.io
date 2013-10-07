@@ -807,3 +807,17 @@ img.dribbble-shot{width: 60px; height: 45px; border: 2px solid white; display: b
   color: rgba(0,0,0,0.7);
   text-shadow: 3px 3px 3px #fff;
 }
+
+.banner-text {
+	font: 400 20px/1.2 'Merienda One', Helvetica, sans-serif;
+	color: rgba(0,0,0,0.7);
+	text-shadow: 3px 3px 3px #fff;
+}
+
+.span-timeout {
+	color: #FF3500;
+}
+
+.banner-text.text{
+	color: #086CA2;
+}
