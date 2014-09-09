@@ -1,0 +1,9 @@
+.grid {
+	margin: 100px auto;
+	min-width: 450px;
+}
+
+.grid .block {
+	background-color: gray;
+	height: 100px;
+}

@@ -1,134 +1,38 @@
----
-layout: default
-title: Petch's
----
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Don't touch the white!!</title>
+	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!-- Custom css -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-<body> 
-  	<!-- Slider of the home page -->
-  	<div class="nivo-sider-wrapper grid_12 clearfix">
-	  	<div id="nivo-slider" class="nivoSlider">
-	  		<img src="img/placeholders/slider-1.png" alt="slider" width="940" height="350" title="#bridge1"/>
-	  		<img src="img/placeholders/slider-2.png" alt="slider" width="940" height="350" title="#htmlcaption" />
-	  		<img src="img/placeholders/slider-3.png" alt="slider" width="940" height="350" />
-	  	</div>
-		
-	  	<div id="bridge1" class="nivo-html-caption">
-			Sunset at Rama-8 bridge.
-		</div>
-  	</div>
-	<!-- End of slider wrapper -->	
-		
-	<!-- <div class="hr-940px grid_12"></div><!-- Gray 1px separator -->
+	<!-- jQeury -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!-- Angular module -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular-route.js"></script>
 
+	<!-- Custom angular -->
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/filter.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
 
-	<!-- Main content of the page starts here -->
-	<div id="page-content" class="clearfix">
-		<!-- Four columns created with 4xgrid_3 class -->
-		<!-- {% for post in site.posts limit:4 %}
-			<div class='grid_3'>
-				<h4>{{ post.title }}</h4>
-				<p>{{ post.detail }}</p>
-				<p>{{ post.date | date_to_string }}<img class="work_platform" src="{{ post.platform }}" height="30"/></p>
+</head>
+<body ng-app="Petzh">
+
+	<div ng-view></div>
+
+	<script type="text/ng-template" id="dont-touch-the-white">
+		<section ng-controller="BaseCtrl">
+			<div class="grid">
+				<div class="col-md-4 block" ng-repeat="i in [] | range:9">X</div>
 			</div>
-		{% endfor %} -->
-			
-		<div class="hr-940px grid_12"><div class="hr-460px"></div></div><!-- Gray 1px separator + 3px blue separator
-		
-		<!-- Full width important paragraph with two images -->
-		<div class="grid_6">
-			<h3 class="important">Chanavee Chunhasri (Petch)</h3>
-			<p><span class="important">LV : </span>25</p>
-			<p><span class="important">Exp : </span>100%</p>
-			<p><span class="important">Skills : </span>Java, Hibernate, Spring, Football, Basketball, Photographer, Invisible, Stun, Earth stomp, God's strength</p>
-		</div>
-		
-		<div class="grid_3">
-			<img src="img/placeholders/small_banner-1.jpg" alt="220-135" width="220" height="135" />
-			<p class="image-description">At the hotel.<span class="important"></span></p>
-		</div>
-		<div class="grid_3">
-			<img src="img/placeholders/small_banner-2.jpg" alt="220-135-2" width="220" height="135" />
-			<p class="image-description">Koh lan.<span class="important"></span> </p>
-		</div>
-		
-		
-	</div><!-- End of page content -->
-	
-	<div class="hr-940px grid_12 clearfix"></div><!-- 1px gray separator -->
-	
-	<!-- Footer starts here -->	
-	<div id="footer-wrapper" class="clearfix"><!-- Footer wrapper starts here -->
-		<footer class="container_12"> <!-- Container -->
-			
-		</footer><!-- End of container -->
-	</div><!-- End of wrapper -->
-	
-
-	
-	
-			
-  <!-- JavaScript at the bottom for fast page loading -->
-  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
-  <script>window.jQuery || document.write("<script src='js/libs/jquery-1.5.1.min.js'>\x3C/script>")</script>
-  <!-- Menu -->
-  <script type="text/javascript" src="js/hoverIntent.js"></script>
-		<script type="text/javascript" src="js/superfish.js"></script>
-		<script> 
-     	$(document).ready(function() { 
-        $('ul#nav').superfish({ 
-            delay:       1000,                            // one second delay on mouseout 
-            animation:   {opacity:'show',height:'show'},  // fade-in and slide-down animation 
-            speed:       'fast',                          // faster animation speed 
-            autoArrows:  false,                           // disable generation of arrow mark-up 
-            dropShadows: false                            // disable drop shadows 
-        	}); 
-    	}); 
- 		</script>
-  
-  <!-- Slider -->
-  <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
-  <script type="text/javascript">
-	$(window).load(function() {
-    $('#nivo-slider').nivoSlider({
-        effect:'random', // Specify sets like: 'fold,fade,sliceDown'
-        slices:15, // For slice animations
-        boxCols: 8, // For box animations
-        boxRows: 4, // For box animations
-        animSpeed:900, // Slide transition speed
-        pauseTime:3000, // How long each slide will show
-        startSlide:0, // Set starting Slide (0 index)
-        directionNav:true, // Next & Prev navigation
-        directionNavHide:true, // Only show on hover
-        controlNav:true, // 1,2,3... navigation
-        keyboardNav:true, // Use left & right arrows
-        pauseOnHover:true, // Stop animation while hovering
-        captionOpacity:0.8, // Universal caption opacity
-        prevText: '', // Prev directionNav text
-        nextText: '' // Next directionNav text
-    });
-});
-</script>
-
-  <!-- Quicksand(portfolio filtering) -->
-	<script type="text/javascript" src="js/jquery.quicksand.js"></script>
-	<script type="text/javascript" src="js/jquery.easing.js"></script>
-    
-  <!-- General scripts  -->
-  <script src="js/script.js"></script>
-  
-  <!--[if lt IE 7 ]>
-    <script src="js/libs/dd_belatedpng.js"></script>
-    <script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
-  <![endif]-->
-
-
-  <!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -->
-  <script>
-    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
-    s.parentNode.insertBefore(g,s)}(document,"script"));
-  </script>
-
+		</section>
+	</script>
 </body>
+</html>
