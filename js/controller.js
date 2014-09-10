@@ -1,6 +1,7 @@
-Petzh.controller("BaseCtrl", function($scope) {
+Petzh.controller("BaseCtrl", function($scope, $route) {
+	$scope.name = ""
+});
 
-	$scope.num = {};
-
+Petzh.controller("DontTouchTheWhiteCtrl", function($scope){
 
 });

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head >
 	<meta charset="UTF-8">
-	<title>Don't touch the white!!</title>
-	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+	<title ng-bind="title">Petch's</title>
+	<link rel="icon" type="image/png" href="/favicon.png"/>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- Custom css -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.united.min.css"> -->
 
 	<!-- jQeury -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -23,16 +25,10 @@
 	<script type="text/javascript" src="js/controller.js"></script>
 
 </head>
-<body ng-app="Petzh">
+<body ng-app="Petzh" ng-controller="BaseCtrl">
+	<div ng-include="'/html/header.html'"></div>
 
-	<div ng-view></div>
+	<div ng-view class="view"></div>
 
-	<script type="text/ng-template" id="dont-touch-the-white">
-		<section ng-controller="BaseCtrl">
-			<div class="grid">
-				<div class="col-md-4 block" ng-repeat="i in [] | range:9">X</div>
-			</div>
-		</section>
-	</script>
 </body>
 </html>

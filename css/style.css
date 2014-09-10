@@ -1,6 +1,7 @@
 .grid {
-	margin: 100px auto;
+	margin: 10% auto;
 	min-width: 450px;
+	min-height: 450px;
 }
 
 .grid .block {
