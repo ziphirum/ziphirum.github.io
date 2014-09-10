@@ -1,3 +1,5 @@
+.color-peach {color : rgba(255, 0, 0, 0.67);}
+
 .grid {
 	margin: 10% auto;
 	min-width: 450px;
@@ -9,11 +11,7 @@
 	height: 100px;
 }
 
-.center {
+.petch-ploy .center {
 	width: 180px;
 	margin: 0 auto;
-}
-
-.red {
-	color : rgba(255, 0, 0, 0.67);
 }

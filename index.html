@@ -5,11 +5,11 @@
 	<title ng-bind="title">Petch's</title>
 	<link rel="icon" type="image/png" href="/favicon.png"/>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- Custom css -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.united.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.lumen.min.css">
 
 	<!-- jQeury -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -28,7 +28,7 @@
 <body ng-app="Petzh" ng-controller="BaseCtrl">
 	<div ng-include="'/html/header.html'"></div>
 
-	<div ng-view class="view"></div>
+	<div class="container" ng-view></div>
 
 </body>
 </html>
