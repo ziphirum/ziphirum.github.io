@@ -6,14 +6,16 @@ Petzh.config(function ($routeProvider) {
 	when("/home",{ 
 		controller: "HomeCtrl",
 		templateUrl: "/html/home.html",
-		title: "Petch's"
 	}).
 	when("/dont-touch-the-white",{ 
 		controller: "DontTouchTheWhiteCtrl",
 		templateUrl: "/html/dont-touch.html",
-		title: "Petch's - Don't touch the white!!"
 	}).
-	otherwise({
+	when("/petch-love-ploy",{ 
+		controller: "BaseCtrl",
+		templateUrl: "/html/petch-love-ploy.html",
+	}).
+	/*otherwise({
 		redirectTo : "/dont-touch-the-white"
-	});
+	});*/
 });
