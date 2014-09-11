@@ -10,6 +10,6 @@ Petzh.controller("RootCtrl", function($scope, $route) {
 
 Petzh.controller("DontTouchCtrl", function($scope) {
 
-	console.log("TEST");
+	console.log("DontTouchCtrl");
 
 });
