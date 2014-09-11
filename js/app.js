@@ -4,20 +4,21 @@ var Petzh = angular.module('Petzh', ['ngRoute']);
 Petzh.config(function ($routeProvider) {
 	$routeProvider
 	.when("/home",{ 
-		controller: "BaseCtrl",
 		templateUrl: "/html/home.html",
+		title: "Home"
 	})
 	.when("/dont-touch-the-white",{ 
-		controller: "BaseCtrl",
 		templateUrl: "/html/dont-touch.html",
+		title: "Don't touch the white!!",
+		controller: "DontTouchCtrl"
 	})
 	.when("/blog",{ 
-		controller: "BaseCtrl",
 		templateUrl: "/html/blog.html",
+		title: "Blog"
 	})
 	.when("/petch-love-ploy",{ 
-		controller: "BaseCtrl",
 		templateUrl: "/html/petch-love-ploy.html",
+		title: "Petch and Ploy"
 	})
 	.otherwise({
 		redirectTo : "/home"
