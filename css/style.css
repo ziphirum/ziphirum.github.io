@@ -1,17 +1,36 @@
-.color-peach {color : rgba(255, 0, 0, 0.67);}
-
-.grid {
-	margin: 10% auto;
-	min-width: 450px;
-	min-height: 450px;
+a {
+	cursor: pointer;
 }
 
-.grid .block {
+section.dont-touch .grid {
+	color: #ffffff;
+}
+
+section.dont-touch .grid .block {
 	background-color: gray;
-	height: 100px;
+	height: 180px;
 }
 
-.petch-ploy .center {
+/* Footer */
+section.footer{
+	position:fixed;
+    height:40px;
+    background-color: #ffffff;
+    bottom:0px;
+    margin-bottom:0px;
+    padding: 0.5em 0;
+}
+section.footer a{
+	color: #6B6A6A;
+	text-decoration: none;
+}
+section.footer a:hover{
+	color: #333333;
+}
+
+/*Special page*/
+section.petch-ploy .center {
 	width: 180px;
 	margin: 0 auto;
 }
+section.petch-ploy .color-peach {color : rgba(255, 0, 0, 0.67);}

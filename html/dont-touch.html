@@ -1,5 +1,25 @@
 <section class="dont-touch">
+	<div class="col-lg-12 text-center">
+		<p>
+			<a ng-click="startTimer()" class="btn btn-success"><i class="fa fa-play"></i></a>
+			<a ng-click="stopTimer()" class="btn btn-danger"><i class="fa fa-pause"></i></a>
+			<a ng-click="resetTimer()" class="btn btn-primary"><i class="fa fa-refresh"></i></a>
+		</p>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-4 text-left">
+			<p><strong>Time left : </strong>{{timer}}</p>
+			<!-- <p><div class="progress-bar" role="progressbar" aria-valuenow="{{timer}}" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div></p> -->
+		</div>
+		<div class="col-lg-4 text-center">
+			
+			<p><strong>Score : </strong>{{score}}</p>
+		</div>
+		<div class="col-lg-4 text-right">
+			<p><strong>Hint</strong>: Dont' touch the white!!</p>
+		</div>
+	</div>
 	<div class="grid">
-		<div class="col-md-4 block" ng-repeat="i in [] | range:9">X</div>
+		<div class="col-lg-4 block" ng-repeat="i in [] | range:9">{{i+1}}</div>
 	</div>
 </section>
