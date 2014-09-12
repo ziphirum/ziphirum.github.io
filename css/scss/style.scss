@@ -1,0 +1,48 @@
+@import 'util';
+
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: #6B6A6A;
+
+	&:hover{
+		@include border-radius(50%);
+	}
+}
+div.view {
+	padding-bottom: 40px;
+}
+
+section {
+	&.dont-touch {
+		.grid {
+			color: #ffffff;
+			.block {
+				background-color: gray;
+  				height: 180px;
+			}
+		}
+	}
+
+	&.footer {
+		position: fixed;
+		background-color: #ffffff;
+		bottom: 0px;
+		margin-bottom: 0px;
+		padding: 0.5em 0;
+
+		.social-fb:hover{
+			color: $fb-color;
+		}
+		.social-twitter:hover{
+			color: $twitter-color;
+		}
+		.social-flickr:hover{
+			color: $flickr-color;
+		}
+		.social-linkedin:hover{
+			color: $linkedin-color;
+		}
+	}
+
+}

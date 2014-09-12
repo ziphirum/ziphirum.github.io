@@ -1,0 +1,13 @@
+$twitter-color: #00a0d1;
+$fb-color: #3b5998;
+$linkedin-color: #007bb6;
+$flickr-color: #ff0084;
+$pinterest-color: #cb2027;
+
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
