@@ -12,10 +12,17 @@ div.view {
   padding-bottom: 40px; }
 
 section.dont-touch .grid {
+  padding-left: 15%;
   color: #ffffff; }
   section.dont-touch .grid .block {
-    background-color: gray;
-    height: 180px; }
+    cursor: pointer;
+    background-color: #333333;
+    height: 180px;
+    margin: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px; }
 section.footer {
   position: fixed;
   background-color: #ffffff;
@@ -30,5 +37,7 @@ section.footer {
     color: #ff0084; }
   section.footer .social-linkedin:hover {
     color: #007bb6; }
+  section.footer .social-github:hover {
+    color: #4183c4; }
 
 /*# sourceMappingURL=style.css.map */

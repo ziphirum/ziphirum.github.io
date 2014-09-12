@@ -24,3 +24,17 @@ Petzh.config(function ($routeProvider) {
 		redirectTo : "/home"
 	});
 });
+
+Petzh.directive("dontTouch", function(){
+	return {
+		restrict: 'A',
+		scope: {},
+		link: function (scope, element, attrs) {
+			element.on("click", function(){
+				alert(attrs.dontTouch);
+			});
+			
+			//manipulate grids here
+		}
+	};
+});

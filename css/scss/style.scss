@@ -16,10 +16,14 @@ div.view {
 section {
 	&.dont-touch {
 		.grid {
+			padding-left: 15%;
 			color: #ffffff;
 			.block {
-				background-color: gray;
+				cursor: pointer;
+				background-color: #333333;
   				height: 180px;
+  				margin: 5px;
+  				@include border-radius(10px);
 			}
 		}
 	}

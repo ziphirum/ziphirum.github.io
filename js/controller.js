@@ -1,10 +1,7 @@
 Petzh.controller("RootCtrl", function($scope, $route) {
-
-	//Set title from routeProvider
 	$scope.$on('$routeChangeSuccess', function(scope, next, current){
 		$scope.title = "Petch's - " + $route.current.title;
 	});
-
 });
 
 
@@ -38,12 +35,9 @@ Petzh.controller("DontTouchCtrl", function($scope, $interval) {
     $scope.resetTimer = function() {
     	$scope.timer = 60;
     	$scope.stopTimer();
-    	// $scope.blood_1 = 100;
-    	// $scope.blood_2 = 120;
     };
 
     $scope.$on('$destroy', function() {
-      	// Make sure that the interval is destroyed too
 		$scope.stopTimer();
   	});
 });
