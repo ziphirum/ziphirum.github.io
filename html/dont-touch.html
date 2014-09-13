@@ -1,34 +1,47 @@
 <section class="dont-touch">
-	<div class="col-lg-12 text-center">
+	<!-- <div class="col-lg-12 text-center">
 		<p>
 			<a ng-click="startTimer()" class="btn btn-success"><i class="fa fa-play"></i></a>
 			<a ng-click="stopTimer()" class="btn btn-danger"><i class="fa fa-pause"></i></a>
 			<a ng-click="resetTimer()" class="btn btn-primary"><i class="fa fa-refresh"></i></a>
 		</p>
-	</div>
+	</div> -->
 	<div class="col-lg-12">
-		<div class="col-lg-4 text-left">
+		<div class="grid-30 text-left">
 			<p><strong>Time left : </strong>{{timer}}</p>
 			<!-- <p><div class="progress-bar" role="progressbar" aria-valuenow="{{timer}}" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div></p> -->
 		</div>
-		<div class="col-lg-4 text-center">
-			
+		<div class="grid-30 text-center">
 			<p><strong>Score : </strong>{{score}}</p>
 		</div>
-		<div class="col-lg-4 text-right">
+		<div class="grid-30 text-right">
 			<p><strong>Hint</strong>: Dont' touch the white!!</p>
 		</div>
 	</div>
-	<div class="col-lg-12 grid text-center">
+	<div class="grid-90">
+		<div class="progress">
+			<div class="progress-bar" role="progressbar" aria-valuenow="{{timer}}" aria-valuemin="0" aria-valuemax="100" style="width: {{timer}}%;">
+				<span class="sr-only">{{timer}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12 block-container text-center">
 		<!-- <div class="col-lg-4 block" ng-repeat="i in [] | range:9">{{i+1}}</div> -->
-		<div class="col-lg-3 block" dont-touch="7"></div>
-		<div class="col-lg-3 block" dont-touch="8"></div>
-		<div class="col-lg-3 block" dont-touch="9"></div>
-		<div class="col-lg-3 block" dont-touch="4"></div>
-		<div class="col-lg-3 block" dont-touch="5"></div>
-		<div class="col-lg-3 block" dont-touch="6"></div>
-		<div class="col-lg-3 block" dont-touch="1"></div>
-		<div class="col-lg-3 block" dont-touch="2"></div>
-		<div class="col-lg-3 block" dont-touch="3"></div>
+		<div id="block-7" class="grid-30 block beware" dont-touch="7"></div>
+		<div id="block-8" class="grid-30 block" dont-touch="8"></div>
+		<div id="block-9" class="grid-30 block" dont-touch="9"></div>
+		<div id="block-4" class="grid-30 block" dont-touch="4"></div>
+		<div id="block-5" class="grid-30 block" dont-touch="5"></div>
+		<div id="block-6" class="grid-30 block" dont-touch="6"></div>
+		<div id="block-1" class="grid-30 block" dont-touch="1"></div>
+		<div id="block-2" class="grid-30 block" dont-touch="2"></div>
+		<div id="block-3" class="grid-30 block" dont-touch="3"></div>
+	</div>
+	<div class="grid-100 text-center">
+		<p>
+			<a ng-click="startTimer()" class="btn btn-success"><i class="fa fa-play"></i></a>
+			<a ng-click="stopTimer()" class="btn btn-danger"><i class="fa fa-pause"></i></a>
+			<a ng-click="resetTimer()" class="btn btn-primary"><i class="fa fa-refresh"></i></a>
+		</p>
 	</div>
 </section>

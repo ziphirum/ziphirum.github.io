@@ -1,3 +1,4 @@
+// Social color theme
 $twitter-color: #00a0d1;
 $fb-color: #3b5998;
 $linkedin-color: #007bb6;
@@ -5,10 +6,22 @@ $flickr-color: #ff0084;
 $pinterest-color: #cb2027;
 $github-color: #4183c4;
 
+//Web 
+$light-gray: #EEE;
+$gray: #AAA;
+$black: #333;
+
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
       -ms-border-radius: $radius;
           border-radius: $radius;
+}
+
+@mixin transition($time, $type) {
+  -webkit-transition: all $time $type;
+  -moz-transition: all $time $type;
+  -o-transition: all $time $type;
+  transition: all $time $type;
 }

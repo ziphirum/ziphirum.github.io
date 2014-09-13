@@ -1,0 +1,58 @@
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: #6B6A6A;
+
+	&:hover{
+		// @include transition(1s, ease);
+		// @include border-radius(50%);
+	}
+}
+div.view {
+	padding-bottom: 40px;
+}
+
+.grid {
+	display: block;
+	float: left;
+}
+.grid-10 {
+	@extend .grid;
+	width: 10%;
+}
+.grid-20 {
+	@extend .grid;
+	width: 20%;
+}
+.grid-30 {
+	@extend .grid;
+	width: 30%;
+}
+.grid-40 {
+	@extend .grid;
+	width: 40%;
+}
+.grid-50 {
+	@extend .grid;
+	width: 50%;
+}
+.grid-60 {
+	@extend .grid;
+	width: 60%;
+}
+.grid-70 {
+	@extend .grid;
+	width: 70%;
+}
+.grid-80 {
+	@extend .grid;
+	width: 80%;
+}
+.grid-90 {
+	@extend .grid;
+	width: 90%;
+}
+.grid-100 {
+	@extend .grid;
+	width: 100%;
+}

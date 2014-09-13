@@ -1,6 +1,7 @@
 var Petzh = angular.module('Petzh', ['ngRoute']);
 
-
+/*************************************************/
+/********************* CONFIG ********************/
 Petzh.config(function ($routeProvider) {
 	$routeProvider
 	.when("/home",{ 
@@ -25,16 +26,38 @@ Petzh.config(function ($routeProvider) {
 	});
 });
 
-Petzh.directive("dontTouch", function(){
+
+/*************************************************/
+/****************** DIRECTIVE ********************/
+Petzh.directive("dontTouch", function($timeout){
 	return {
-		restrict: 'A',
-		scope: {},
+		restrict: "A",
 		link: function (scope, element, attrs) {
 			element.on("click", function(){
-				alert(attrs.dontTouch);
+				select(element);
 			});
-			
 			//manipulate grids here
+			var ctrl = element.controller();
+			function select(grid){
+				var blocks = $(".block");
+				var blockNum = getRandomInt(1,10); //1-9
+				if (grid.hasClass("beware")){
+					alert("GAME OVER");
+				} else {
+					$(".block").removeClass("beware");
+					$("#block-" + blockNum).addClass("beware");
+
+					$timeout(function(){
+						ctrl.addScore();
+					})
+				}
+			}
+
+
+			function getRandomInt(min, max) {
+				return Math.floor(Math.random() * (max - min)) + min;
+			}
+
 		}
 	};
 });

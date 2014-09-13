@@ -37,6 +37,12 @@ Petzh.controller("DontTouchCtrl", function($scope, $interval) {
     	$scope.stopTimer();
     };
 
+    //Public function
+    this.addScore = function(){
+        $scope.score++;
+    }
+    $scope.addScore = this.addScore;
+
     $scope.$on('$destroy', function() {
 		$scope.stopTimer();
   	});
