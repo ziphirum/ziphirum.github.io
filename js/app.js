@@ -34,23 +34,17 @@ Petzh.directive("dontTouch", function($timeout, $PPservice){
 		restrict: "A",
 		link: function(scope, element, attrs){
 			var ctrl = element.controller();
-			scope.$on("dontTouch:reset", function(event){
-				$timeout(function(){
-					scope.score = 0;
-					scope.whiteBlock = 1;
-				});
-				//Reset block
-				$(".block").removeClass("beware");
-			});
-
 			scope.$on("dontTouch:end", function(){
 				$timeout(function(){
 					$('#modalScore').modal();
+					$(".block").removeClass("beware");
 				});
 			});
 
-			$('#modalScore').on('hidden.bs.modal', function (e) {
-				ctrl.resetTimer();
+			$('#modalScore').on('hide.bs.modal', function (e) {
+				$timeout(function(){
+					ctrl.resetTimer();
+				});
 			});
 		}
 	}
@@ -71,9 +65,9 @@ Petzh.directive("dontTouchBlock", function($timeout, $PPservice){
 			function selectBlock(block){
 				blockNums = $PPservice.getBlockList(scope.whiteBlock);
 				if (block.hasClass("beware")){
+					console.log(3);
 					$timeout(function(){
-						$('#modalScore').modal();
-						$(".block").removeClass("beware");
+						ctrl.end();
 					});
 				} else {
 					$(".block").removeClass("beware");
@@ -96,10 +90,10 @@ Petzh.directive("dontTouchBlock", function($timeout, $PPservice){
 					} else if (scope.score < 25){
 						scope.whiteBlock = 5;
 						scope.timer += 4;
-					} else if (scope.score < 30){
+					} else if (scope.score < 40){
 						scope.whiteBlock = 6;
 						scope.timer += 3;
-					} else if (scope.score < 50){
+					} else if (scope.score < 60){
 						scope.whiteBlock = 7;
 						scope.timer += 2;
 					} else {
@@ -121,18 +115,18 @@ Petzh.directive("dontTouchBlock", function($timeout, $PPservice){
 /*************************************************/
 /****************** Services  ********************/
 Petzh.factory("$PPservice", function($timeout){
-	var service = {};
+	return {
 
-	service.getBlockList = function(amount){
-		var list = [];
-		var numbers = [1,2,3,4,5,6,7,8,9];
-		for (var x=0 ; x<amount ; x++){
-			var index = _.random(numbers.length - 1);
-			var n = numbers.splice(index, 1);
-			list.push(n[0]);
-		}
-		return list;
-	}
+        getBlockList: function(amount) {
+        	var list = [];
+        	var numbers = [1,2,3,4,5,6,7,8,9];
+        	for (var x=0 ; x<amount ; x++){
+        		var index = _.random(numbers.length - 1);
+        		var n = numbers.splice(index, 1);
+        		list.push(n[0]);
+        	}
+        	return list;
+        }
 
-	return service;
+    };
 });

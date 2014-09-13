@@ -7,8 +7,7 @@ Petzh.controller("RootCtrl", function($scope, $route) {
 
 Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
 	
-    $scope.modifier = 10;
-    $scope.defaultTime = 5 * $scope.modifier;
+    $scope.defaultTime = 30;
     $scope.timer = angular.copy($scope.defaultTime);
     $scope.whiteBlock = 1; //use in directive
 	$scope.score = 0;
@@ -22,8 +21,8 @@ Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
         		$scope.timer -= 1;
         	} else {
                 $timeout(function(){
-                    $scope.$broadcast("dontTouch:end");
-                    $scope.resetTimer();
+                    $scope.stopTimer();
+                    $scope.end();
                 });
         	}
         }, 100);
@@ -41,18 +40,24 @@ Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
 
 
     this.resetTimer = function() {
-    	$scope.timer = $scope.defaultTime;
+    	$scope.timer = angular.copy($scope.defaultTime);
         $scope.score = 0;
+        $scope.whiteBlock = 1;
     	$scope.stopTimer();
-        $scope.$broadcast("dontTouch:reset");
     };
     $scope.resetTimer = this.resetTimer;
 
-    //Public function
+
     this.addScore = function(){
         $scope.score++;
     };
     $scope.addScore = this.addScore;
+
+
+    this.end = function(){
+        $scope.$broadcast("dontTouch:end");
+    };
+    $scope.end = this.end;
 
 
     $scope.$on('$destroy', function() {
