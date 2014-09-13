@@ -40,14 +40,18 @@ div.view {
 .grid-100 {
   width: 100%; }
 
+section.dont-touch .hint {
+  font-size: 1.5em; }
 section.dont-touch .block-container {
-  color: #fff; }
+  color: #fff;
+  margin: 0 auto; }
   section.dont-touch .block-container .block {
     cursor: pointer;
     background-color: #333;
-    height: 180px;
-    margin: 5px;
-    border: 1px solid #EEE;
+    height: 120px;
+    width: 120px;
+    margin: 10px;
+    border: 1px solid #fff;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -55,8 +59,13 @@ section.dont-touch .block-container {
     border-radius: 10px; }
     section.dont-touch .block-container .block.beware {
       background-color: #fff; }
-section.dont-touch a.btn.refresh {
-  width: 100px; }
+section.dont-touch .progress.bar-center {
+  margin: 20px auto;
+  width: 360px; }
+section.dont-touch .btn-container {
+  padding: 20px 0; }
+  section.dont-touch .btn-container a.btn.refresh {
+    width: 100px; }
 section.footer {
   position: fixed;
   background-color: #fff;

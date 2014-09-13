@@ -3,14 +3,19 @@
 
 section {
 	&.dont-touch {
+		.hint {
+			font-size: 1.5em;
+		}
 		.block-container {
 			color: #fff;
+			margin: 0 auto;
 			.block {
 				cursor: pointer;
 				background-color: $black;
-				height: 180px;
-				margin: 5px;
-				border: 1px solid $light-gray;
+				height: 120px;
+				width: 120px;
+				margin: 10px;
+				border: 1px solid #fff;
 				@include border-radius(10px);
 
 				&.beware {
@@ -18,8 +23,18 @@ section {
 				}
 			}
 		}
-		a.btn.refresh{
-			width: 100px;
+
+		.progress.bar-center {
+			margin: 20px auto;
+			width: 360px;
+		}
+
+		.btn-container {
+			padding: 20px 0;
+
+			a.btn.refresh{
+				width: 100px;
+			}
 		}
 	}
 

@@ -8,7 +8,7 @@ Petzh.controller("RootCtrl", function($scope, $route) {
 Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
 	
     $scope.modifier = 10;
-    $scope.defaultTime = 10 * $scope.modifier;
+    $scope.defaultTime = 5 * $scope.modifier;
     $scope.timer = angular.copy($scope.defaultTime);
     $scope.whiteBlock = 1; //use in directive
 	$scope.score = 0;
@@ -19,7 +19,7 @@ Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
         if ( angular.isDefined(stop) ) return;
         stop = $interval(function() {
         	if ($scope.timer > 0) {
-        		$scope.timer -= 2;
+        		$scope.timer -= 1;
         	} else {
                 $timeout(function(){
                     $scope.$broadcast("dontTouch:end");

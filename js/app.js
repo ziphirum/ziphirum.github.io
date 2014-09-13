@@ -77,29 +77,29 @@ Petzh.directive("dontTouchBlock", function($timeout, $PPservice){
 
 					if (scope.score < 5){
 						scope.whiteBlock = 1;
-						scope.timer += 10;
+						scope.timer += 8;
 					} else if (scope.score < 10){
 						scope.whiteBlock = 2;
-						scope.timer += 8;
+						scope.timer += 7;
 					} else if (scope.score < 15){
 						scope.whiteBlock = 3;
 						scope.timer += 6;
 					} else if (scope.score < 20){
 						scope.whiteBlock = 4;
-						scope.timer += 4;
+						scope.timer += 5;
 					} else if (scope.score < 25){
 						scope.whiteBlock = 5;
-						scope.timer += 2;
-					}/* else if (scope.score < 30){
-						scope.whiteBlock = 6;
-						scope.timer += 5;
-					} else if (scope.score < 35){
-						scope.whiteBlock = 7;
 						scope.timer += 4;
-					} else if (scope.score < 40){
-						scope.whiteBlock = 8;
+					} else if (scope.score < 30){
+						scope.whiteBlock = 6;
 						scope.timer += 3;
-					}*/
+					} else if (scope.score < 50){
+						scope.whiteBlock = 7;
+						scope.timer += 2;
+					} else {
+						scope.whiteBlock = 8;
+						scope.timer += 1;
+					}
 
 					$timeout(function(){
 						ctrl.addScore();
