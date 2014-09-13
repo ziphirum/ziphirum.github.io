@@ -13,15 +13,16 @@ $black: #333;
 
 
 @mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
+  	-webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+      	-ms-border-radius: $radius;
+       	 -o-border-radius: $radius;
+          	border-radius: $radius;
 }
 
 @mixin transition($time, $type) {
-  -webkit-transition: all $time $type;
-  -moz-transition: all $time $type;
-  -o-transition: all $time $type;
-  transition: all $time $type;
+	-webkit-transition: all $time $type;
+       -moz-transition: all $time $type;
+		 -o-transition: all $time $type;
+			transition: all $time $type;
 }
