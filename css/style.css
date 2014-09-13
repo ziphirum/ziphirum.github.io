@@ -55,6 +55,8 @@ section.dont-touch .block-container {
     border-radius: 10px; }
     section.dont-touch .block-container .block.beware {
       background-color: #fff; }
+section.dont-touch a.btn.refresh {
+  width: 100px; }
 section.footer {
   position: fixed;
   background-color: #fff;

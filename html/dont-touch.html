@@ -7,9 +7,9 @@
 		</p>
 	</div> -->
 	<div class="col-lg-12">
-		<!-- <div class="grid-30 text-left">
+		<div class="grid-30 text-left">
 			<p><strong>Time left : </strong>{{timer}}</p>
-		</div> -->
+		</div>
 		<div class="grid-50 text-left">
 			<p><strong>Score : </strong>{{score}}</p>
 		</div>
@@ -17,7 +17,7 @@
 			<p><strong>Hint</strong>: Dont' touch the white!!</p>
 		</div>
 	</div>
-	<div class="grid-100">
+	<div class="grid-90">
 		<div class="progress">
 			<div class="progress-bar" role="progressbar" aria-valuenow="{{timer/modifier}}" aria-valuemin="0" aria-valuemax="100" style="width: {{timer/modifier}}%;">
 				<span class="sr-only">{{timer}}</span>
@@ -38,9 +38,9 @@
 	</div>
 	<div class="grid-100 text-center">
 		<p>
-			<a ng-click="startTimer()" class="btn btn-success"><i class="fa fa-play"></i></a>
-			<a ng-click="stopTimer()" class="btn btn-danger"><i class="fa fa-pause"></i></a>
-			<a ng-click="resetTimer()" class="btn btn-primary"><i class="fa fa-refresh"></i></a>
+			<!-- <a ng-click="startTimer()" class="btn btn-success"><i class="fa fa-play"></i></a>
+			<a ng-click="stopTimer()" class="btn btn-danger"><i class="fa fa-pause"></i></a> -->
+			<a ng-click="resetTimer()" class="btn btn-danger refresh"><i class="fa fa-refresh"></i></a>
 		</p>
 	</div>
 </section>

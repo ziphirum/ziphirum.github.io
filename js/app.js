@@ -29,26 +29,24 @@ Petzh.config(function ($routeProvider) {
 
 /*************************************************/
 /****************** DIRECTIVE ********************/
-Petzh.directive("dontTouch", function($timeout){
+Petzh.directive("dontTouch", function($timeout, $PPservice){
 	return {
 		restrict: "A",
 		link: function(scope, element, attrs){
+			var ctrl = element.controller();
 			scope.$on("dontTouch:reset", function(event){
 				$timeout(function(){
 					scope.score = 0;
 					scope.whiteBlock = 1;
 				});
+				//Reset block
 				$(".block").removeClass("beware");
-				var blockNums = $PPservice.getBlockList(scope.whiteBlock);
-				angular.forEach(blockNums, function(num){
-					$("#block-" + num).addClass("beware");
-				});
 			});
 
 			scope.$on("dontTouch:end", function(){
-				ctrl.resetTimer();
 				alert("GAME OVER: Your score is: " + scope.score);
-			})
+				ctrl.resetTimer();
+			});
 		}
 	}
 });
@@ -68,8 +66,9 @@ Petzh.directive("dontTouchBlock", function($timeout, $PPservice){
 			function selectBlock(block){
 				blockNums = $PPservice.getBlockList(scope.whiteBlock);
 				if (block.hasClass("beware")){
-					ctrl.resetTimer();
 					alert("GAME OVER: Your score is: " + scope.score);
+					$(".block").removeClass("beware");
+					ctrl.resetTimer();
 				} else {
 					$(".block").removeClass("beware");
 					angular.forEach(blockNums, function(num){
