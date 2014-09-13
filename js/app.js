@@ -44,7 +44,12 @@ Petzh.directive("dontTouch", function($timeout, $PPservice){
 			});
 
 			scope.$on("dontTouch:end", function(){
-				alert("GAME OVER: Your score is: " + scope.score);
+				$timeout(function(){
+					$('#modalScore').modal();
+				});
+			});
+
+			$('#modalScore').on('hidden.bs.modal', function (e) {
 				ctrl.resetTimer();
 			});
 		}
@@ -66,9 +71,10 @@ Petzh.directive("dontTouchBlock", function($timeout, $PPservice){
 			function selectBlock(block){
 				blockNums = $PPservice.getBlockList(scope.whiteBlock);
 				if (block.hasClass("beware")){
-					alert("GAME OVER: Your score is: " + scope.score);
-					$(".block").removeClass("beware");
-					ctrl.resetTimer();
+					$timeout(function(){
+						$('#modalScore').modal();
+						$(".block").removeClass("beware");
+					});
 				} else {
 					$(".block").removeClass("beware");
 					angular.forEach(blockNums, function(num){

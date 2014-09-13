@@ -1,21 +1,6 @@
 <section class="dont-touch" dont-touch>
-	<!-- <div class="col-lg-12 text-center">
-		<p>
-			<a ng-click="startTimer()" class="btn btn-success"><i class="fa fa-play"></i></a>
-			<a ng-click="stopTimer()" class="btn btn-danger"><i class="fa fa-pause"></i></a>
-			<a ng-click="resetTimer()" class="btn btn-primary"><i class="fa fa-refresh"></i></a>
-		</p>
-	</div> -->
 	<div class="col-lg-12 text-center">
-		<!-- <div class="grid-30 text-left">
-			<p><strong>Time left : </strong>{{timer}}</p>
-		</div> -->
-		<!-- <div class="grid-50 text-left">
-			<p><strong>Score : </strong>{{score}}</p>
-		</div> -->
-		<!-- <div class="grid-50 text-right"> -->
-			<p class="hint"><strong>Hint</strong>: Dont' touch the white!!</p>
-		<!-- </div> -->
+		<p class="hint"><strong>Hint</strong>: Dont' touch the white !!</p>
 	</div>
 	<div class="col-lg-12">
 		<div class="progress bar-center">
@@ -25,15 +10,6 @@
 		</div>
 	</div>
 	<div class="col-lg-12">
-		<!-- <div id="block-7" class="grid-30 block" dont-touch-block></div>
-		<div id="block-8" class="grid-30 block" dont-touch-block></div>
-		<div id="block-9" class="grid-30 block" dont-touch-block></div>
-		<div id="block-4" class="grid-30 block" dont-touch-block></div>
-		<div id="block-5" class="grid-30 block" dont-touch-block></div>
-		<div id="block-6" class="grid-30 block" dont-touch-block></div>
-		<div id="block-1" class="grid-30 block" dont-touch-block></div>
-		<div id="block-2" class="grid-30 block" dont-touch-block></div>
-		<div id="block-3" class="grid-30 block" dont-touch-block></div> -->
 		<table class="block-container">
 			<tr>
 				<td id="block-7" class="block" dont-touch-block></td>
@@ -56,10 +32,28 @@
 	</div>
 	<div class="col-lg-12 text-center btn-container">
 		<p><strong>Score : </strong>{{score}}</p>
-		<p>
-			<!-- <a ng-click="startTimer()" class="btn btn-success"><i class="fa fa-play"></i></a>
-			<a ng-click="stopTimer()" class="btn btn-danger"><i class="fa fa-pause"></i></a> -->
-			<a ng-click="resetTimer()" class="btn btn-danger refresh"><i class="fa fa-refresh"></i></a>
-		</p>
+		<p><a ng-click="resetTimer()" class="btn btn-danger refresh"><i class="fa fa-refresh"></i></a></p>
 	</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="modalScore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Game Over</h4>
+				</div>
+				<div class="modal-body">
+					Your score is {{score}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="resetTimer()">Close</button>
+					<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 </section>
