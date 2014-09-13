@@ -7,25 +7,24 @@
 		</p>
 	</div> -->
 	<div class="col-lg-12">
-		<div class="grid-30 text-left">
+		<!-- <div class="grid-30 text-left">
 			<p><strong>Time left : </strong>{{timer}}</p>
-			<!-- <p><div class="progress-bar" role="progressbar" aria-valuenow="{{timer}}" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div></p> -->
-		</div>
-		<div class="grid-30 text-center">
+		</div> -->
+		<div class="grid-50 text-left">
 			<p><strong>Score : </strong>{{score}}</p>
 		</div>
-		<div class="grid-30 text-right">
+		<div class="grid-50 text-right">
 			<p><strong>Hint</strong>: Dont' touch the white!!</p>
 		</div>
 	</div>
-	<div class="grid-90">
+	<div class="grid-100">
 		<div class="progress">
 			<div class="progress-bar" role="progressbar" aria-valuenow="{{timer/modifier}}" aria-valuemin="0" aria-valuemax="100" style="width: {{timer/modifier}}%;">
 				<span class="sr-only">{{timer}}</span>
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-12 block-container text-center">
+	<div class="grid-100 block-container text-center">
 		<!-- <div class="col-lg-4 block" ng-repeat="i in [] | range:9">{{i+1}}</div> -->
 		<div id="block-7" class="grid-30 block" dont-touch-block></div>
 		<div id="block-8" class="grid-30 block" dont-touch-block></div>
