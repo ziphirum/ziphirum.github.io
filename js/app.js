@@ -49,6 +49,7 @@ Petzh.directive("dontTouch", function($timeout, $PPservice){
 			var ctrl = element.controller();
 			scope.$on("dontTouch:end", function(){
 				$timeout(function(){
+					$("#press-any-block").fadeIn();
 					$('#modalScore').modal();
 					$(".block").removeClass("beware");
 				});
@@ -73,6 +74,7 @@ Petzh.directive("dontTouchBlock", function($timeout, $PPservice){
 		restrict: "A",
 		link: function (scope, element, attrs) {
 			element.on("click", function(){
+				$("#press-any-block").fadeOut();
 				selectBlock(element);
 			});
 			var ctrl = element.controller();

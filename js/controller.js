@@ -8,7 +8,8 @@ Petzh.controller("RootCtrl", function($scope, $route) {
 Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
 	
     $scope.defaultTime = 30;
-    $scope.timer = angular.copy($scope.defaultTime);
+    $scope.timer = 0;
+    // $scope.timer = angular.copy($scope.defaultTime);
     $scope.whiteBlock = 1; //use in directive
 	$scope.score = 0;
 
@@ -16,6 +17,7 @@ Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
 	this.startTimer = function() {
         // Don't start a new fight if we are already fighting
         if ( angular.isDefined(stop) ) return;
+        $scope.timer = angular.copy($scope.defaultTime);
         stop = $interval(function() {
         	if ($scope.timer > 0) {
         		$scope.timer -= 1;
@@ -40,10 +42,11 @@ Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
 
 
     this.resetTimer = function() {
-    	$scope.timer = angular.copy($scope.defaultTime);
-        $scope.score = 0;
-        $scope.whiteBlock = 1;
+    	// $scope.timer = angular.copy($scope.defaultTime);
     	$scope.stopTimer();
+        $scope.score = 0;
+        $scope.timer = 0;
+        $scope.whiteBlock = 1;
     };
     $scope.resetTimer = this.resetTimer;
 
