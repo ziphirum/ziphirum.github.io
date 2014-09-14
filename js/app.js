@@ -29,6 +29,19 @@ Petzh.config(function ($routeProvider) {
 
 /*************************************************/
 /****************** DIRECTIVE ********************/
+Petzh.directive("affix", function(){
+	/* activate sidebar */
+	return {
+		restrict: "A",
+		link: function(scope, element, attrs){
+			element.affix({
+				// offset: {top:235}
+			})
+
+		}
+	}
+});
+
 Petzh.directive("dontTouch", function($timeout, $PPservice){
 	return {
 		restrict: "A",
@@ -41,10 +54,15 @@ Petzh.directive("dontTouch", function($timeout, $PPservice){
 				});
 			});
 
-			$('#modalScore').on('hide.bs.modal', function (e) {
+			$('#modalScore').on('hide.bs.modal', function (event) {
 				$timeout(function(){
 					ctrl.resetTimer();
 				});
+			});
+
+			$(document).on("keydown", function (event) {
+			    var num = event.keyCode - 96;
+			    $("#block-" + num).click();
 			});
 		}
 	}

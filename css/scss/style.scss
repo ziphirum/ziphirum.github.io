@@ -38,6 +38,25 @@ section {
 		}
 	}
 
+	&.blog {
+
+		// .affix-top, .affix{
+		// 	position: static;
+		// }
+		// #sidebar.affix-top {
+		// 	position: static;
+		// 	margin-top:30px;
+		// 	width:228px;
+		// }
+		
+		// #sidebar.affix {
+		// 	position: fixed;
+		// 	top:70px;
+		// 	width:228px;
+		// }
+
+	}
+
 	&.footer {
 		position: fixed;
 		background-color: #fff;
