@@ -61,10 +61,10 @@ Petzh.directive("dontTouch", function($timeout, $PPservice){
 				});
 			});
 
-			$(document).on("keydown", function (event) {
-			    var num = event.keyCode - 96;
-			    $("#block-" + num).click();
-			});
+			// $(document).on("keydown", function (event) {
+			//     var num = event.keyCode - 96;
+			//     $("#block-" + num).click();
+			// });
 		}
 	}
 });
