@@ -1,7 +1,11 @@
-Petzh.controller("RootCtrl", function($scope, $route) {
+Petzh.controller("RootCtrl", function($scope, $route, $location, $anchorScroll) {
 	$scope.$on('$routeChangeSuccess', function(scope, next, current){
-		$scope.title = "Petch's - " + $route.current.title;
+		$scope.title = $route.current.title;
 	});
+    $scope.scrollTo = function(id) {
+      $location.hash(id);
+      $anchorScroll();
+   }
 });
 
 

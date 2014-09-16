@@ -21,6 +21,10 @@ Petzh.config(function ($routeProvider) {
 		templateUrl: "/html/petch-love-ploy.html",
 		title: "Petch and Ploy"
 	})
+	.when("/me",{ 
+		templateUrl: "/html/me.html",
+		title: "My Life so far"
+	})
 	.otherwise({
 		redirectTo : "/home"
 	});

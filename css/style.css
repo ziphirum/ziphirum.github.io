@@ -2,6 +2,8 @@ a {
   cursor: pointer;
   text-decoration: none;
   color: #6B6A6A; }
+  a:hover {
+    text-decoration: none; }
 
 div.view {
   padding-bottom: 40px; }

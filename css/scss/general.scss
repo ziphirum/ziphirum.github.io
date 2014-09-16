@@ -4,6 +4,7 @@ a {
 	color: #6B6A6A;
 
 	&:hover{
+		text-decoration: none;
 		// @include transition(1s, ease);
 		// @include border-radius(50%);
 	}
