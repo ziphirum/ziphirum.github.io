@@ -42,6 +42,9 @@ div.view {
 .grid-100 {
   width: 100%; }
 
+body .view {
+  padding-top: 75px; }
+
 section.dont-touch .hint {
   font-size: 1.5em; }
 section.dont-touch .block-container {

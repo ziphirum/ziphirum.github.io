@@ -33,18 +33,18 @@ Petzh.config(function ($routeProvider) {
 
 /*************************************************/
 /****************** DIRECTIVE ********************/
-Petzh.directive("affix", function(){
-	/* activate sidebar */
-	return {
-		restrict: "A",
-		link: function(scope, element, attrs){
-			element.affix({
-				// offset: {top:235}
-			})
+// Petzh.directive("affix", function(){
+// 	/* activate sidebar */
+// 	return {
+// 		restrict: "A",
+// 		link: function(scope, element, attrs){
+// 			element.affix({
+// 				offset: {top:0}
+// 			})
 
-		}
-	}
-});
+// 		}
+// 	}
+// });
 
 Petzh.directive("dontTouch", function($timeout, $PPservice){
 	return {
