@@ -2,11 +2,12 @@ var Petzh = angular.module('Petzh', ['ngRoute']);
 
 /*************************************************/
 /********************* CONFIG ********************/
-Petzh.config(function ($routeProvider) {
+Petzh.config(function ($routeProvider, $httpProvider) {
 	$routeProvider
 	.when("/home",{ 
 		templateUrl: "/html/home.html",
-		title: "Home"
+		title: "Home",
+		identifier: "home"
 	})
 	.when("/dont-touch-the-white",{ 
 		templateUrl: "/html/dont-touch.html",
@@ -17,7 +18,7 @@ Petzh.config(function ($routeProvider) {
 	.when("/blog",{ 
 		templateUrl: "/html/blog.html",
 		title: "Blog",
-		identifier: "blog-1"
+		identifier: "blog-0"
 	})
 	.when("/petch-love-ploy",{ 
 		templateUrl: "/html/petch-love-ploy.html",
@@ -27,9 +28,26 @@ Petzh.config(function ($routeProvider) {
 		templateUrl: "/html/me.html",
 		title: "My Life so far"
 	})
+	.when("/blog-1",{ 
+		templateUrl: "/html/blog/blog-1.html",
+		title: "Awesome blog 1",
+		identifier: "blog-1"
+	})
+	.when("/blog-2",{ 
+		templateUrl: "/html/blog/blog-2.html",
+		title: "Awesome blog 2",
+		identifier: "blog-2"
+	})
+	.when("/blog-3",{ 
+		templateUrl: "/html/blog/blog-3.html",
+		title: "Awesome blog 3",
+		identifier: "blog-3"
+	})
 	.otherwise({
 		redirectTo : "/home"
 	});
+
+	$httpProvider.interceptors.push('httpRequestInterceptor');
 });
 
 Petzh.run(function ($rootScope) {
@@ -38,7 +56,7 @@ Petzh.run(function ($rootScope) {
 
 /*************************************************/
 /****************** DIRECTIVE ********************/
-Petzh.directive("disqus", function($rootScope, $route){
+Petzh.directive("disqus", function($rootScope, $route, $q, $timeout){
 	/* activate sidebar */
 	return {
 		restrict: "A",
@@ -48,28 +66,28 @@ Petzh.directive("disqus", function($rootScope, $route){
 		    var disqus_title = $route.current.title;
 		    var disqus_url = 'https://ziphirum.github.io/#!' + $route.current.originalPath;
 
-		    console.log(disqus_shortname);
-		    console.log(disqus_identifier);
-		    console.log(disqus_title);
-		    console.log(disqus_url);
-	        /* * * DON'T EDIT BELOW THIS LINE * * */
 	        var dsq = $rootScope.disqus;
 	        if(angular.isDefined(dsq)){
-	        	console.log("disqus-reset");
-	        	DISQUS.reset({
-	        		reload: true,
-	        		config: function () {  
-	        			this.page.identifier = disqus_identifier;  
-	        			this.page.url = disqus_url;
-	        		}
-	        	});
+				disqusReset(disqus_identifier, disqus_url);
 	        } else {
-	        	console.log("disqus-load");
 	            dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	        	
 	        	$rootScope.disqus = dsq;
+
+	        	$timeout(function(){
+	        		disqusReset(disqus_identifier, disqus_url);
+	        	}, 1000);
+	        }
+
+	        function disqusReset(identifier, url){
+	        	DISQUS.reset({
+	        		reload: true,
+	        		config: function () {  
+	        			this.page.identifier = identifier;  
+	        			this.page.url = url;
+	        		}
+	        	});
 	        }
 		}
 	}
@@ -182,4 +200,17 @@ Petzh.factory("$PPservice", function($timeout){
         }
 
     };
+});
+
+Petzh.factory('httpRequestInterceptor',function($q, $location){
+
+	return {
+		request: function (config) {
+			// console.log(config);
+			// var token = $cookieStore.get("auth");
+			// config.url =  URI(config.url).addSearch({'_auth_token':token}).toString();
+			return config;
+		}
+	}
+
 });
