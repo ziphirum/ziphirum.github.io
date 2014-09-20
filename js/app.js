@@ -11,11 +11,13 @@ Petzh.config(function ($routeProvider) {
 	.when("/dont-touch-the-white",{ 
 		templateUrl: "/html/dont-touch.html",
 		title: "Don't touch the white!!",
-		controller: "DontTouchCtrl"
+		controller: "DontTouchCtrl",
+		identifier: "game-1"
 	})
 	.when("/blog",{ 
 		templateUrl: "/html/blog.html",
-		title: "Blog"
+		title: "Blog",
+		identifier: "blog-1"
 	})
 	.when("/petch-love-ploy",{ 
 		templateUrl: "/html/petch-love-ploy.html",
@@ -30,21 +32,48 @@ Petzh.config(function ($routeProvider) {
 	});
 });
 
+Petzh.run(function ($rootScope) {
+	$rootScope.disqus;//assign disqus block to rootScope for avoid duplicate call
+});
 
 /*************************************************/
 /****************** DIRECTIVE ********************/
-// Petzh.directive("affix", function(){
-// 	/* activate sidebar */
-// 	return {
-// 		restrict: "A",
-// 		link: function(scope, element, attrs){
-// 			element.affix({
-// 				offset: {top:0}
-// 			})
+Petzh.directive("disqus", function($rootScope, $route){
+	/* activate sidebar */
+	return {
+		restrict: "A",
+		link: function(scope, element, attrs){
+			var disqus_shortname = 'ziphirum'; // required: replace example with your forum shortname
+		    var disqus_identifier = $route.current.identifier;
+		    var disqus_title = $route.current.title;
+		    var disqus_url = 'https://ziphirum.github.io/#!' + $route.current.originalPath;
 
-// 		}
-// 	}
-// });
+		    console.log(disqus_shortname);
+		    console.log(disqus_identifier);
+		    console.log(disqus_title);
+		    console.log(disqus_url);
+	        /* * * DON'T EDIT BELOW THIS LINE * * */
+	        var dsq = $rootScope.disqus;
+	        if(angular.isDefined(dsq)){
+	        	console.log("disqus-reset");
+	        	DISQUS.reset({
+	        		reload: true,
+	        		config: function () {  
+	        			this.page.identifier = disqus_identifier;  
+	        			this.page.url = disqus_url;
+	        		}
+	        	});
+	        } else {
+	        	console.log("disqus-load");
+	            dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	        	
+	        	$rootScope.disqus = dsq;
+	        }
+		}
+	}
+});
 
 Petzh.directive("dontTouch", function($timeout, $PPservice){
 	return {

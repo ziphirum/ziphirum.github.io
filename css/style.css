@@ -8,6 +8,9 @@ a {
 div.view {
   padding-bottom: 40px; }
 
+#disqus_thread {
+  margin-top: 5em; }
+
 .grid, .grid-10, .grid-20, .grid-30, .grid-40, .grid-50, .grid-60, .grid-70, .grid-80, .grid-90, .grid-100 {
   display: block;
   float: left; }
