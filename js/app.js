@@ -56,8 +56,7 @@ Petzh.run(function ($rootScope) {
 
 /*************************************************/
 /****************** DIRECTIVE ********************/
-Petzh.directive("disqus", function($rootScope, $route, $q, $timeout){
-	/* activate sidebar */
+Petzh.directive("disqus", function($rootScope, $route, $timeout){
 	return {
 		restrict: "A",
 		link: function(scope, element, attrs){
