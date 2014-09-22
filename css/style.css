@@ -81,15 +81,15 @@ section.footer {
   margin-bottom: 0px;
   padding: 0.5em 0;
   width: 100%; }
-  section.footer .social-fb:hover {
+  section.footer .social.fb:hover {
     color: #3b5998; }
-  section.footer .social-twitter:hover {
+  section.footer .social.twitter:hover {
     color: #00a0d1; }
-  section.footer .social-flickr:hover {
+  section.footer .social.flickr:hover {
     color: #ff0084; }
-  section.footer .social-linkedin:hover {
+  section.footer .social.linkedin:hover {
     color: #007bb6; }
-  section.footer .social-github:hover {
+  section.footer .social.github:hover {
     color: #4183c4; }
 
 /*# sourceMappingURL=style.css.map */
