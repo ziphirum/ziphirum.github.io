@@ -38,7 +38,9 @@ Petzh.controller('MapCtrl', ['$scope', function($scope){
         return map;
     }
     $scope.generateMap = function() {
-        $scope.map = generateArray($scope.mapSize);
+        if (window.confirm("Generate Map ?")){
+            $scope.map = generateArray($scope.mapSize);
+        }
     }
     $scope.generateMapCode = function() {
         $scope.mapCode = JSON.stringify($scope.map);
