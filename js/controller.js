@@ -8,6 +8,39 @@ Petzh.controller("RootCtrl", function($scope, $route, $location, $anchorScroll) 
    }
 });
 
+Petzh.controller('MapCtrl', ['$scope', function($scope){
+    $scope.mapSize = 10;//Default value
+    $scope.map = {};
+    $scope.elements = ['path', 'tree', 'water', 'building'];
+    $scope.selected = $scope.elements[0];
+
+    $scope.selectElement = function(type) {
+        $scope.selected = type;
+    }
+
+    var generateArray = function(size) {
+        var map = new Array(Number(size));
+        for (var i = 0; i < Number(size); i++) {
+            map[i] = new Array(Number(size));
+            for (var j = 0 ; j< Number(size) ; j++) {
+                map[i][j] = {type:''};
+            }
+        }
+        return map;
+    }
+    $scope.generateMap = function() {
+        $scope.map = generateArray($scope.mapSize);
+    }
+    $scope.generateMapCode = function() {
+        $scope.mapCode = JSON.stringify($scope.map);
+    }
+    $scope.setElement = function(tile) {
+        tile['type'] = $scope.selected;
+    }
+
+}]);
+
+
 
 Petzh.controller("DontTouchCtrl", function($scope, $interval, $timeout) {
 	

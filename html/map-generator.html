@@ -1,0 +1,35 @@
+<section class="map-generator">
+	<div class="col-lg-8 text-center">
+		<div class="form-group">
+		  <div class="input-group">
+		    <span class="input-group-addon">[]</span>
+		    <input type="text" class="form-control" ng-model="mapSize">
+		    <span class="input-group-btn">
+		      <button class="btn btn-default" type="button" ng-click="generateMap()">Generate MAP</button>
+		      <button class="btn btn-default" type="button" ng-click="generateMapCode()">Get CODE!!</button>
+		    </span>
+		  </div>
+		</div>
+	</div>
+	<div class="col-lg-4 text-center">
+	</div>
+
+    <div class="map-container col-lg-12">
+    	<div class="col-lg-8">
+		    <div ng-repeat="row in map">
+		        <div ng-repeat="tile in row track by $index" class="tile" ng-mousedown="setElement(tile)" ng-class="tile.type"></div>
+		    </div>
+    	</div>
+    	<div class="col-lg-4">
+	    	<div class="btn-group btn-group-justified">
+	    		<a class="btn btn-default" ng-repeat="e in elements" ng-click="selectElement(e)">{{e}}</a>
+			</div>
+			<br>
+			<div class="form-group">
+		      	<div class="col-md-12">
+		        	<textarea class="form-control" rows="3" id="textArea" ng-model="mapCode"></textarea>
+		      	</div>
+		    </div>
+    	</div>
+    </div>
+</section>

@@ -48,6 +48,22 @@ div.view {
 body .view {
   padding-top: 75px; }
 
+section.map-generator .map-container {
+  height: 380px;
+  width: 100%;
+  margin: 4vh 0 2vh 0; }
+  section.map-generator .map-container .tile {
+    background-color: #DDD;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: solid 1px #777; }
+    section.map-generator .map-container .tile.path {
+      background-color: #000; }
+    section.map-generator .map-container .tile.tree {
+      background-color: #99DE8D; }
+    section.map-generator .map-container .tile.water {
+      background-color: #8DB5DE; }
 section.dont-touch .hint {
   font-size: 1.5em; }
 section.dont-touch .block-container {

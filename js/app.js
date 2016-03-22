@@ -15,6 +15,12 @@ Petzh.config(function ($routeProvider, $httpProvider) {
 		controller: "DontTouchCtrl",
 		identifier: "game-1"
 	})
+	.when("/map-generator",{ 
+		templateUrl: "/html/map-generator.html",
+		title: "Map generator",
+		controller: "MapCtrl",
+		identifier: "map-1"
+	})
 	.when("/blog",{ 
 		templateUrl: "/html/blog.html",
 		title: "Blog",
