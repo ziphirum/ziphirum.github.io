@@ -59,11 +59,13 @@ section.map-generator .map-container {
     height: 20px;
     border: solid 1px #777; }
     section.map-generator .map-container .tile.path {
-      background-color: #000; }
+      background-color: #CCC; }
     section.map-generator .map-container .tile.tree {
       background-color: #99DE8D; }
     section.map-generator .map-container .tile.water {
       background-color: #8DB5DE; }
+    section.map-generator .map-container .tile.wall {
+      background-color: #222; }
 section.dont-touch .hint {
   font-size: 1.5em; }
 section.dont-touch .block-container {

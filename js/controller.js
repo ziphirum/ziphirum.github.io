@@ -11,11 +11,17 @@ Petzh.controller("RootCtrl", function($scope, $route, $location, $anchorScroll) 
 Petzh.controller('MapCtrl', ['$scope', function($scope){
     $scope.mapSize = 10;//Default value
     $scope.map = {};
-    $scope.elements = ['path', 'tree', 'water', 'building'];
+    $scope.elements = [
+        {'type':'path', 'walkable': 1},
+        {'type':'tree', 'walkable': 0},
+        {'type':'water', 'walkable': 1},
+        {'type':'wall', 'walkable': 0},
+        {'type':'building', 'walkable': 0}
+    ];
     $scope.selected = $scope.elements[0];
 
-    $scope.selectElement = function(type) {
-        $scope.selected = type;
+    $scope.selectElement = function(element) {
+        $scope.selected = element;
     }
 
     var generateArray = function(size) {
@@ -23,7 +29,10 @@ Petzh.controller('MapCtrl', ['$scope', function($scope){
         for (var i = 0; i < Number(size); i++) {
             map[i] = new Array(Number(size));
             for (var j = 0 ; j< Number(size) ; j++) {
-                map[i][j] = {type:''};
+                map[i][j] = {
+                    'type':'wall',
+                    'walkable': 0 //false
+                }
             }
         }
         return map;
@@ -35,7 +44,8 @@ Petzh.controller('MapCtrl', ['$scope', function($scope){
         $scope.mapCode = JSON.stringify($scope.map);
     }
     $scope.setElement = function(tile) {
-        tile['type'] = $scope.selected;
+        tile['type'] = $scope.selected.type;
+        tile['walkable'] = $scope.selected.walkable;
     }
 
 }]);

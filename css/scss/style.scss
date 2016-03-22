@@ -24,13 +24,16 @@ section {
 		    	border: solid 1px #777;
 
 		    	&.path {
-		    		background-color: #000;
+		    		background-color: #CCC;
 		    	}
 		    	&.tree {
 		    		background-color: #99DE8D;
 		    	}
 		    	&.water {
 		    		background-color: #8DB5DE;
+		    	}
+		    	&.wall {
+		    		background-color: #222;
 		    	}
 		    }
 		}
