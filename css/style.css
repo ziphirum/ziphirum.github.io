@@ -60,7 +60,7 @@ section.map-generator .map-container {
     border: solid 1px #777; }
     section.map-generator .map-container .tile.path {
       background-color: #CCC; }
-    section.map-generator .map-container .tile.tree {
+    section.map-generator .map-container .tile.grass {
       background-color: #99DE8D; }
     section.map-generator .map-container .tile.water {
       background-color: #8DB5DE; }

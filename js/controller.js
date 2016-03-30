@@ -13,10 +13,9 @@ Petzh.controller('MapCtrl', ['$scope', function($scope){
     $scope.map = {};
     $scope.elements = [
         {'type':'path', 'walkable': 1},
-        {'type':'tree', 'walkable': 0},
-        {'type':'water', 'walkable': 1},
-        {'type':'wall', 'walkable': 0},
-        {'type':'building', 'walkable': 0}
+        {'type':'grass', 'walkable': 2},
+        {'type':'water', 'walkable': 3},
+        {'type':'wall', 'walkable': 0}
     ];
     $scope.selected = $scope.elements[0];
 
