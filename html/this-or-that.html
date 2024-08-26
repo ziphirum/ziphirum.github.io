@@ -32,6 +32,11 @@
         <div class="text-center mt-4" id="btn-start">
             <button class="btn btn-dark mb-4" onclick="startGame()">Start</button>
         </div>
+
+        <div class="text-center mt-4 d-none" id="btn-reset">
+            <button class="btn btn-secondary mb-4" onclick="reset()">reset</button>
+        </div>
+
     </div>
 
     <script>
@@ -54,7 +59,6 @@
             eliminated = [];
             lastChallenger = null;
             document.getElementById('btn-start').classList.add('d-none');
-            document.getElementById('btn-start').classList.add('d-none');
             document.getElementById('eliminatedItems').value = '';
             document.getElementById('choiceContainer').classList.remove('d-none');
             document.getElementById('winner').innerText = '';
@@ -67,7 +71,8 @@
                 updateItemCount();
                 document.getElementById('winner').innerText = `The winner is: \n${items[0]}`;
                 document.getElementById('choiceContainer').classList.add('d-none');
-                document.getElementById('btn-start').classList.remove('d-none');
+                // document.getElementById('btn-start').classList.remove('d-none');
+                document.getElementById('btn-reset').classList.remove('d-none');
                 return;
             }
 
@@ -102,6 +107,32 @@
         function updateItemCount() {
             document.getElementById('input-number').innerText = items.length;
             document.getElementById('eliminated-number').innerText = eliminated.length;
+        }
+
+        function reset() {
+            const eliminatedText = document.getElementById('eliminatedItems').value.trim();
+            
+            if (eliminatedText) {
+                // Get the current text from "inputItems" textarea
+                const inputItems = document.getElementById('inputItems');
+                const currentText = inputItems.value.trim();
+                
+                // Add a newline if there's already text in "inputItems"
+                const newText = currentText ? currentText + '\n' + eliminatedText : eliminatedText;
+                
+                // Set the new text in "inputItems"
+                inputItems.value = newText;
+                
+                // Clear the "eliminatedItems" textarea
+                document.getElementById('eliminatedItems').value = '';
+                document.getElementById('btn-reset').classList.add('d-none');
+                document.getElementById('btn-start').classList.remove('d-none');
+                document.getElementById('winner').innerText = '';
+                updateItemCount();
+            } else {
+                alert("No text in 'Eliminated Items' to add.");
+            }
+
         }
 
     </script>
