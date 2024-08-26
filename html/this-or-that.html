@@ -19,9 +19,6 @@
                 <textarea id="eliminatedItems" class="form-control eliminated-items mb-4" rows="10"></textarea>
             </div>
         </div>
-        <div class="text-center" id="btn-start">
-            <button class="btn btn-dark mb-4" onclick="startGame()">Start</button>
-        </div>
 
         <div class="choice-container row d-none text-center" id="choiceContainer">
             <div id="choice1" class="choice col-md-5 mx-auto btn btn-outline-primary mb-2 p-5" onclick="chooseItem('choice1')"></div>
@@ -29,6 +26,10 @@
         </div>
 
         <h2 id="winner" class="text-center mt-4"></h2>
+        
+        <div class="text-center mt-4" id="btn-start">
+            <button class="btn btn-dark mb-4" onclick="startGame()">Start</button>
+        </div>
     </div>
 
     <script>
@@ -61,7 +62,7 @@
         function pickChoice() {
             if (items.length === 1) {
                 updateItemCount();
-                document.getElementById('winner').innerText = `The winner is: ${items[0]}`;
+                document.getElementById('winner').innerText = `The winner is: \n${items[0]}`;
                 document.getElementById('choiceContainer').classList.add('d-none');
                 document.getElementById('btn-start').hidden = false;
                 return;
