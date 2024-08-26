@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This or That</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="mt-5">
+    <div class="container">
+        <!-- <h1 class="text-center mb-4">This or That</h1> -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Input: (<span id="input-number">0</span>)</h5>
+                <textarea id="inputItems" class="form-control mb-4" rows="10" placeholder="Enter each item on a new line..."></textarea>
+            </div>
+            <div class="col-md-6">
+                <h5>Eliminated: (<span id="eliminated-number">0</span>)</h5>
+                <textarea id="eliminatedItems" class="form-control eliminated-items mb-4" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="text-center" id="btn-start">
+            <button class="btn btn-dark mb-4" onclick="startGame()">Start</button>
+        </div>
+
+        <div class="choice-container row d-none text-center" id="choiceContainer">
+            <div id="choice1" class="choice col-md-5 mx-auto btn btn-outline-primary mb-2 p-5" onclick="chooseItem('choice1')"></div>
+            <div id="choice2" class="choice col-md-5 mx-auto btn btn-outline-primary mb-2 p-5" onclick="chooseItem('choice2')"></div>
+        </div>
+
+        <h2 id="winner" class="text-center mt-4"></h2>
+    </div>
+
+    <script>
+        let items = [];
+        let eliminated = [];
+        let currentWinner = null;
+        let lastChallenger = null;
+
+        function startGame() {
+            const input = document.getElementById('inputItems').value.trim();
+            if (!input) {
+                alert("Please enter at least two items.");
+                return;
+            }
+            items = input.split("\n").filter(item => item.trim() !== '');
+            if (items.length < 2) {
+                alert("Please enter at least two items.");
+                return;
+            }
+            document.getElementById('btn-start').hidden = true;
+            eliminated = [];
+            lastChallenger = null;
+            document.getElementById('eliminatedItems').value = '';
+            document.getElementById('choiceContainer').classList.remove('d-none');
+            document.getElementById('winner').innerText = '';
+            currentWinner = items[Math.floor(Math.random() * items.length)];
+            pickChoice();
+        }
+
+        function pickChoice() {
+            if (items.length === 1) {
+                updateItemCount();
+                document.getElementById('winner').innerText = `The winner is: ${items[0]}`;
+                document.getElementById('choiceContainer').classList.add('d-none');
+                document.getElementById('btn-start').hidden = false;
+                return;
+            }
+
+            let nextChallenger;
+            do {
+                nextChallenger = items[Math.floor(Math.random() * items.length)];
+            } while (nextChallenger === currentWinner || nextChallenger === lastChallenger);
+
+            lastChallenger = nextChallenger;
+
+            document.getElementById('choice1').innerText = currentWinner;
+            document.getElementById('choice2').innerText = nextChallenger;
+            updateItemCount();
+        }
+
+        function chooseItem(choice) {
+            const choice1 = document.getElementById('choice1').innerText;
+            const choice2 = document.getElementById('choice2').innerText;
+            const chosenItem = (choice === 'choice1') ? choice1 : choice2;
+            const eliminatedItem = (choice === 'choice1') ? choice2 : choice1;
+
+            currentWinner = chosenItem;
+            items = items.filter(item => item.trim() != eliminatedItem.trim());
+            document.getElementById('inputItems').value = items.join('\n');
+
+            eliminated.push(eliminatedItem);
+            document.getElementById('eliminatedItems').value = eliminated.join('\n');
+
+            pickChoice();
+        }
+        
+        function updateItemCount() {
+            document.getElementById('input-number').innerText = items.length;
+            document.getElementById('eliminated-number').innerText = eliminated.length;
+        }
+
+    </script>
+</body>
+</html>
