@@ -105,7 +105,7 @@
         <h1 class="text-4xl font-extrabold text-center mb-10 text-yellow-300">Poker Chip Counter</h1>
 
         <div id="setupScreen" class="space-y-8">
-            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm /* Removed border-gray-600 */">
+            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm">
                 <h2 class="text-2xl font-semibold mb-4 text-gray-100">Game Setup</h2>
                 <div class="flex flex-col sm:flex-row gap-4 mb-6">
                     <label for="startingChipsInput" class="text-gray-300 self-center">Starting Chips:</label>
@@ -134,14 +134,14 @@
                 </div>
             </div>
 
-            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm /* Removed border-gray-600 */">
+            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm">
                 <h2 class="text-2xl font-semibold mb-4 text-gray-100">Players List</h2>
                 <div id="setupPlayerList" class="space-y-4">
                     </div>
                 <p id="noPlayersSetupMessage" class="text-center text-gray-400 mt-4 hidden">No players added yet. Add some players to start!</p>
             </div>
 
-            <div class="p-6 bg-gray-700 rounded-lg shadow-sm /* Removed border-gray-600 */ flex flex-col sm:flex-row justify-center gap-4">
+            <div class="p-6 bg-gray-700 rounded-lg shadow-sm flex flex-col sm:flex-row justify-center gap-4">
                 <button
                     id="startGameButton"
                     class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition duration-300 ease-in-out w-full sm:w-auto"
@@ -158,24 +158,24 @@
         </div>
 
         <div id="gameScreen" class="space-y-8 hidden">
-            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm /* Removed border-gray-600 */">
+            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm">
                 <h2 class="text-2xl font-semibold mb-4 text-gray-100">Players In Game</h2>
                 <div id="gamePlayerList" class="space-y-4">
                     </div>
             </div>
 
-            <div class="p-6 bg-gray-700 rounded-lg shadow-sm /* Removed border-gray-600 */ flex flex-col-reverse sm:flex-row sm:justify-between items-center gap-4">
-                <button
-                    id="restartGameButton"
-                    class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out w-full sm:w-auto"
-                >
-                    Restart Game
-                </button>
+            <div class="p-6 bg-gray-700 rounded-lg shadow-sm flex flex-col-reverse sm:flex-row sm:justify-between items-center gap-4">
                 <button
                     id="endRoundButton"
                     class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-md transition duration-300 ease-in-out w-full sm:w-auto sm:flex-grow"
                 >
                     End Round
+                </button>
+                <button
+                    id="restartGameButton"
+                    class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out w-full sm:w-auto"
+                >
+                    Restart Game
                 </button>
             </div>
         </div>
@@ -331,7 +331,6 @@
 
             players.forEach((player, index) => {
                 const playerCard = document.createElement('div');
-                // Removed border-gray-700
                 playerCard.className = 'bg-gray-800 p-4 rounded-lg shadow-sm flex items-center justify-between gap-4';
                 playerCard.innerHTML = `
                     <span class="text-xl font-bold text-blue-400">${player.name}</span>
@@ -358,7 +357,6 @@
 
             players.forEach((player, index) => {
                 const playerCard = document.createElement('div');
-                // Removed border-gray-700
                 playerCard.className = `bg-gray-800 p-5 rounded-lg shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 ${player.folded ? 'folded-player' : ''}`;
                 playerCard.dataset.index = index;
 
@@ -376,13 +374,11 @@
 
                 // Player Current Bet Display
                 const playerCurrentBetDisplay = document.createElement('span');
-                // Changed text color to a brighter yellow-200
                 playerCurrentBetDisplay.className = 'text-lg font-semibold text-yellow-200 w-full sm:w-auto text-center';
                 playerCurrentBetDisplay.textContent = `Bet: ${player.currentBet}`;
 
                 // Betting Controls
                 const bettingControls = document.createElement('div');
-                // Removed border-t border-gray-700
                 bettingControls.className = 'betting-controls flex flex-wrap gap-2 w-full justify-center mt-2 pt-2';
 
                 // Bet Amount Input (for staging the bet)
@@ -391,21 +387,20 @@
                 betInput.placeholder = '0'; // Default to 0
                 betInput.value = player.stagedBet || 0; // Use stagedBet for persistence within the round
                 betInput.min = "0";
-                betInput.className = 'w-full sm:w-24 p-2 rounded-md bg-gray-900 text-white border border-gray-600 focus:ring-0 focus:border-blue-400 text-center'; /* Responsive width */
+                betInput.className = 'w-full sm:w-24 p-2 rounded-md bg-gray-900 text-white border border-gray-600 focus:ring-0 focus:border-blue-400 text-center';
                 betInput.oninput = (event) => {
                     // Update stagedBet directly on input change
                     player.stagedBet = parseInt(event.target.value) || 0;
-                    saveGameState(); // Save immediately
+                    saveGameState();
                 };
 
                 // Bet Adjustment Buttons
                 const betAdjustAmounts = [1, 5, 10];
                 const adjustmentButtonsRow = document.createElement('div');
-                adjustmentButtonsRow.className = 'flex flex-wrap gap-2 w-full'; // Ensure it wraps
+                adjustmentButtonsRow.className = 'flex flex-wrap gap-2 w-full';
                 betAdjustAmounts.forEach(amount => {
                     const button = document.createElement('button');
-                    // Reduced padding and font size for smaller buttons, fixed width for better wrapping
-                    button.className = 'chip-btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded-md text-sm w-[calc(33.33%-0.5rem)] sm:w-auto flex-grow'; /* Approx 3 per row on mobile */
+                    button.className = 'chip-btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded-md text-sm w-[calc(33.33%-0.5rem)] sm:w-auto flex-grow';
                     button.textContent = `+${amount}`;
                     button.onclick = () => {
                         betInput.value = parseInt(betInput.value || 0) + amount;
@@ -415,46 +410,32 @@
                     adjustmentButtonsRow.appendChild(button);
                 });
 
-                // Removed Reset Bet Staging Button
-                // const resetBetButton = document.createElement('button');
-                // resetBetButton.className = 'chip-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-md text-sm w-[calc(33.33%-0.5rem)] sm:w-auto flex-grow';
-                // resetBetButton.textContent = 'Reset';
-                // resetBetButton.onclick = () => {
-                //     betInput.value = 0;
-                //     player.stagedBet = 0;
-                //     saveGameState();
-                // };
-                // adjustmentButtonsRow.appendChild(resetBetButton); // This line is now removed
-                bettingControls.appendChild(betInput); // Add input first
-                bettingControls.appendChild(adjustmentButtonsRow); // Then the row of adjustment buttons
+                bettingControls.appendChild(betInput);
+                bettingControls.appendChild(adjustmentButtonsRow);
 
 
                 // Action Buttons
                 const actionButtonsRow = document.createElement('div');
-                actionButtonsRow.className = 'flex flex-wrap gap-2 w-full'; // Ensure it wraps
+                actionButtonsRow.className = 'flex flex-wrap gap-2 w-full';
 
                 const callButton = document.createElement('button');
-                // Reduced padding and font size for smaller buttons, fixed width for better wrapping
-                callButton.className = 'chip-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-3 rounded-md text-sm w-1/2 sm:w-auto flex-grow'; /* py-2 px-3, text-sm, w-1/2 for 2 per row */
+                callButton.className = 'chip-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-3 rounded-md text-sm w-1/2 sm:w-auto flex-grow';
                 let callAmount = Math.max(0, highestCurrentBet - player.currentBet);
                 callButton.textContent = `Call (${callAmount})`;
                 callButton.onclick = () => callPlayer(index, callAmount);
 
                 const betRaiseButton = document.createElement('button');
-                // Reduced padding and font size for smaller buttons, fixed width for better wrapping
-                betRaiseButton.className = 'chip-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-md text-sm w-1/2 sm:w-auto flex-grow'; /* py-2 px-3, text-sm, w-1/2 for 2 per row */
+                betRaiseButton.className = 'chip-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-md text-sm w-1/2 sm:w-auto flex-grow';
                 betRaiseButton.textContent = 'Bet/Raise';
                 betRaiseButton.onclick = () => placeBet(index, parseInt(betInput.value || 0));
 
                 const allInButton = document.createElement('button');
-                // Reduced padding and font size for smaller buttons, fixed width for better wrapping
-                allInButton.className = 'chip-btn bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-md text-sm w-1/2 sm:w-auto flex-grow'; /* py-2 px-3, text-sm, w-1/2 for 2 per row */
+                allInButton.className = 'chip-btn bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-md text-sm w-1/2 sm:w-auto flex-grow';
                 allInButton.textContent = 'All-In';
-                allInButton.onclick = () => allIn(index);
+                allInButton.onclick = () => confirmAllIn(index); // Call confirmAllIn instead of allIn directly
 
                 const foldButton = document.createElement('button');
-                // Reduced padding and font size for smaller buttons, fixed width for better wrapping
-                foldButton.className = 'chip-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-3 rounded-md text-sm w-1/2 sm:w-auto flex-grow'; /* py-2 px-3, text-sm, w-1/2 for 2 per row */
+                foldButton.className = 'chip-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-3 rounded-md text-sm w-1/2 sm:w-auto flex-grow';
                 foldButton.textContent = 'Fold';
                 foldButton.onclick = () => confirmFold(index);
 
@@ -542,6 +523,18 @@
                 players[index].currentBet += chipsToCommit;
                 players[index].stagedBet = 0; // Clear staged bet on call
                 renderGamePlayerList();
+            }
+        }
+
+        /**
+         * Shows a confirmation before going all-in.
+         * @param {number} index - Index of the player.
+         */
+        async function confirmAllIn(index) {
+            const playerName = players[index].name;
+            const confirmed = await showConfirmation(`Are you sure ${playerName} wants to go All-In?`);
+            if (confirmed) {
+                allIn(index);
             }
         }
 
