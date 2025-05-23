@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Chip Counter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Inter font and general body styling */
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-optical-sizing: auto;
+            background-color: #1f2937; /* Slightly softer dark background */
+            color: #d1d5db; /* Lighter gray text color */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the start to allow for scrolling if many players */
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        /* Ensure the main container is centered and takes appropriate width */
+        .container {
+            max-width: 960px; /* Slightly wider container */
+            width: 100%;
+            background-color: #374151; /* Muted dark background for container */
+            padding: 32px; /* Increased padding */
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        }
+        /* Style for input focus */
+        input:focus {
+            outline: none;
+            border-color: #60a5fa; /* Blue border on focus */
+            box-shadow: 0 0 0 1px #60a5fa; /* Subtle blue glow on focus */
+        }
+        /* Button hover effects */
+        button:hover {
+            opacity: 0.9;
+        }
+        /* Specific styles for chip adjustment buttons */
+        .chip-btn {
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-out;
+        }
+        .chip-btn:active {
+            transform: translateY(1px);
+        }
+        /* Overlay for confirmation/winner selection modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #374151;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            color: #d1d5db;
+        }
+        .modal-content button {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        /* Styling for folded players */
+        .folded-player .betting-controls {
+            opacity: 0.5;
+            pointer-events: none; /* Disable interaction */
+        }
+        .folded-player .player-info {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-6 bg-gray-800 rounded-xl shadow-lg">
+        <h1 class="text-4xl font-extrabold text-center mb-10 text-yellow-300">Poker Chip Counter</h1>
+
+        <div id="setupScreen" class="space-y-8">
+            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm border border-gray-600">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-100">Game Setup</h2>
+                <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                    <label for="startingChipsInput" class="text-gray-300 self-center">Starting Chips:</label>
+                    <input
+                        type="number"
+                        id="startingChipsInput"
+                        value="100"
+                        min="1"
+                        class="w-32 p-3 rounded-md bg-gray-900 text-white border border-gray-600 focus:ring-0 focus:border-blue-400 text-center"
+                    />
+                </div>
+                <h2 class="text-2xl font-semibold mb-4 text-gray-100">Add New Player</h2>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <input
+                        type="text"
+                        id="playerNameInput"
+                        placeholder="Enter player name"
+                        class="flex-grow p-3 rounded-md bg-gray-900 text-white border border-gray-600 focus:ring-0 focus:border-blue-400"
+                    />
+                    <button
+                        id="addPlayerButton"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition duration-300 ease-in-out"
+                    >
+                        Add Player
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm border border-gray-600">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-100">Players List</h2>
+                <div id="setupPlayerList" class="space-y-4">
+                    </div>
+                <p id="noPlayersSetupMessage" class="text-center text-gray-400 mt-4 hidden">No players added yet. Add some players to start!</p>
+            </div>
+
+            <div class="p-6 bg-gray-700 rounded-lg shadow-sm border border-gray-600 flex flex-col sm:flex-row justify-center gap-4">
+                <button
+                    id="startGameButton"
+                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition duration-300 ease-in-out"
+                >
+                    Start Game
+                </button>
+                <button
+                    id="resetAllButton"
+                    class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-md transition duration-300 ease-in-out"
+                >
+                    Reset All (Clear Saved Data)
+                </button>
+            </div>
+        </div>
+
+        <div id="gameScreen" class="space-y-8 hidden">
+            <div class="mb-8 p-6 bg-gray-700 rounded-lg shadow-sm border border-gray-600">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-100">Players In Game</h2>
+                <div id="gamePlayerList" class="space-y-4">
+                    </div>
+            </div>
+
+            <div class="p-6 bg-gray-700 rounded-lg shadow-sm border border-gray-600 flex flex-col sm:flex-row sm:justify-between items-center gap-4">
+                <button
+                    id="endRoundButton"
+                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-md transition duration-300 ease-in-out w-full sm:w-auto sm:flex-grow"
+                >
+                    End Round
+                </button>
+                <button
+                    id="restartGameButton"
+                    class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out sm:w-auto"
+                >
+                    Restart Game
+                </button>
+            </div>
+        </div>
+
+        <div id="confirmationModal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <p class="text-xl font-semibold mb-6" id="confirmationMessage"></p>
+                <button id="confirmYes" class="bg-red-500 hover:bg-red-600 text-white">Yes</button>
+                <button id="confirmNo" class="bg-gray-500 hover:bg-gray-600 text-white">No</button>
+            </div>
+        </div>
+
+        <div id="winnerSelectionModal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <p class="text-xl font-semibold mb-6">Select the winner of this round:</p>
+                <div id="winnerOptions" class="flex flex-wrap justify-center gap-3 mb-4">
+                    </div>
+                <button id="cancelWinnerSelection" class="bg-gray-500 hover:bg-gray-600 text-white">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Global State Variables
+        let players = [];
+        let gameStarted = false; // Controls which screen is visible
+        let startingChips = 100; // Default starting chips
+
+        // Local Storage Keys
+        const STORAGE_KEY_PLAYERS = 'pokerChipCounterPlayers';
+        const STORAGE_KEY_GAME_STARTED = 'pokerChipCounterGameStarted';
+        const STORAGE_KEY_STARTING_CHIPS = 'pokerChipCounterStartingChips';
+
+        // DOM Elements
+        const setupScreen = document.getElementById('setupScreen');
+        const gameScreen = document.getElementById('gameScreen');
+        const startingChipsInput = document.getElementById('startingChipsInput');
+        const playerNameInput = document.getElementById('playerNameInput');
+        const addPlayerButton = document.getElementById('addPlayerButton');
+        const setupPlayerList = document.getElementById('setupPlayerList');
+        const noPlayersSetupMessage = document.getElementById('noPlayersSetupMessage');
+        const startGameButton = document.getElementById('startGameButton');
+        const resetAllButton = document.getElementById('resetAllButton');
+
+        const gamePlayerList = document.getElementById('gamePlayerList');
+        const endRoundButton = document.getElementById('endRoundButton');
+        const restartGameButton = document.getElementById('restartGameButton');
+
+        const confirmationModal = document.getElementById('confirmationModal');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+        const confirmYes = document.getElementById('confirmYes');
+        const confirmNo = document.getElementById('confirmNo');
+
+        const winnerSelectionModal = document.getElementById('winnerSelectionModal');
+        const winnerOptions = document.getElementById('winnerOptions');
+        const cancelWinnerSelection = document.getElementById('cancelWinnerSelection');
+
+        // --- Utility Functions ---
+
+        /**
+         * Shows a confirmation modal and returns a Promise that resolves with true/false.
+         * @param {string} message - The message to display in the confirmation modal.
+         * @returns {Promise<boolean>} - True if confirmed, false otherwise.
+         */
+        function showConfirmation(message) {
+            return new Promise(resolve => {
+                confirmationMessage.textContent = message;
+                confirmationModal.classList.remove('hidden');
+
+                const handleYes = () => {
+                    confirmationModal.classList.add('hidden');
+                    confirmYes.removeEventListener('click', handleYes);
+                    confirmNo.removeEventListener('click', handleNo);
+                    resolve(true);
+                };
+
+                const handleNo = () => {
+                    confirmationModal.classList.add('hidden');
+                    confirmYes.removeEventListener('click', handleYes);
+                    confirmNo.removeEventListener('click', handleNo);
+                    resolve(false);
+                };
+
+                confirmYes.addEventListener('click', handleYes);
+                confirmNo.addEventListener('click', handleNo);
+            });
+        }
+
+        // --- State Management (Save/Load) ---
+
+        /**
+         * Saves the current game state (players, gameStarted flag, startingChips) to local storage.
+         */
+        function saveGameState() {
+            try {
+                localStorage.setItem(STORAGE_KEY_PLAYERS, JSON.stringify(players));
+                localStorage.setItem(STORAGE_KEY_GAME_STARTED, JSON.stringify(gameStarted));
+                localStorage.setItem(STORAGE_KEY_STARTING_CHIPS, JSON.stringify(startingChips));
+            } catch (e) {
+                console.error("Error saving to localStorage:", e);
+            }
+        }
+
+        /**
+         * Loads game state from local storage.
+         */
+        function loadGameState() {
+            try {
+                const storedPlayers = localStorage.getItem(STORAGE_KEY_PLAYERS);
+                if (storedPlayers) {
+                    players = JSON.parse(storedPlayers);
+                } else {
+                    players = [];
+                }
+
+                const storedGameStarted = localStorage.getItem(STORAGE_KEY_GAME_STARTED);
+                if (storedGameStarted) {
+                    gameStarted = JSON.parse(storedGameStarted);
+                } else {
+                    gameStarted = false;
+                }
+
+                const storedStartingChips = localStorage.getItem(STORAGE_KEY_STARTING_CHIPS);
+                if (storedStartingChips) {
+                    startingChips = JSON.parse(storedStartingChips);
+                } else {
+                    startingChips = 100; // Default if not found
+                }
+                startingChipsInput.value = startingChips; // Update input field
+            } catch (e) {
+                console.error("Error loading from localStorage:", e);
+                // If corrupted data, reset to initial state
+                players = [];
+                gameStarted = false;
+                startingChips = 100;
+                startingChipsInput.value = startingChips;
+            }
+        }
+
+        // --- Rendering Functions ---
+
+        /**
+         * Renders the player list for the setup screen.
+         */
+        function renderSetupPlayerList() {
+            setupPlayerList.innerHTML = '';
+            if (players.length === 0) {
+                noPlayersSetupMessage.classList.remove('hidden');
+            } else {
+                noPlayersSetupMessage.classList.add('hidden');
+            }
+
+            players.forEach((player, index) => {
+                const playerCard = document.createElement('div');
+                playerCard.className = 'bg-gray-800 p-4 rounded-lg shadow-sm flex items-center justify-between gap-4 border border-gray-700';
+                playerCard.innerHTML = `
+                    <span class="text-xl font-bold text-blue-400">${player.name}</span>
+                    <span class="text-lg text-gray-300">Chips: ${player.chips}</span>
+                `;
+                setupPlayerList.appendChild(playerCard);
+            });
+            saveGameState(); // Save state after rendering
+        }
+
+        /**
+         * Renders the player list for the game screen.
+         */
+        function renderGamePlayerList() {
+            gamePlayerList.innerHTML = '';
+
+            // Determine the highest current bet among active players for 'Call' logic
+            let highestCurrentBet = 0;
+            players.forEach(p => {
+                if (!p.folded) {
+                    highestCurrentBet = Math.max(highestCurrentBet, p.currentBet);
+                }
+            });
+
+            players.forEach((player, index) => {
+                const playerCard = document.createElement('div');
+                playerCard.className = `bg-gray-800 p-5 rounded-lg shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-700 ${player.folded ? 'folded-player' : ''}`;
+                playerCard.dataset.index = index;
+
+                // Player Name and Chips
+                const playerInfo = document.createElement('div');
+                playerInfo.className = 'player-info flex flex-col items-center sm:items-start flex-grow';
+                const playerName = document.createElement('span');
+                playerName.className = 'text-xl font-bold text-blue-400 mb-1';
+                playerName.textContent = player.name;
+                const playerChips = document.createElement('span');
+                playerChips.className = 'text-2xl font-extrabold text-yellow-300';
+                playerChips.textContent = `Chips: ${player.chips}`;
+                playerInfo.appendChild(playerName);
+                playerInfo.appendChild(playerChips);
+
+                // Player Current Bet Display
+                const playerCurrentBetDisplay = document.createElement('span');
+                playerCurrentBetDisplay.className = 'text-lg font-semibold text-gray-300 w-full sm:w-auto text-center';
+                playerCurrentBetDisplay.textContent = `Bet: ${player.currentBet}`;
+
+                // Betting Controls
+                const bettingControls = document.createElement('div');
+                bettingControls.className = 'betting-controls flex flex-wrap gap-2 w-full sm:w-auto justify-center mt-2 pt-2 border-t border-gray-700';
+
+                // Bet Amount Input (for staging the bet)
+                const betInput = document.createElement('input');
+                betInput.type = 'number';
+                betInput.placeholder = '0'; // Default to 0
+                betInput.value = player.stagedBet || 0; // Use stagedBet for persistence within the round
+                betInput.min = "0";
+                betInput.className = 'w-24 p-2 rounded-md bg-gray-900 text-white border border-gray-600 text-center';
+                betInput.oninput = (event) => {
+                    // Update stagedBet directly on input change
+                    player.stagedBet = parseInt(event.target.value) || 0;
+                    saveGameState(); // Save immediately
+                };
+
+                // Bet Adjustment Buttons
+                const betAdjustAmounts = [1, 5, 10];
+                betAdjustAmounts.forEach(amount => {
+                    const button = document.createElement('button');
+                    button.className = 'chip-btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-2.5 px-4 rounded-md text-base';
+                    button.textContent = `+${amount}`;
+                    button.onclick = () => {
+                        betInput.value = parseInt(betInput.value || 0) + amount;
+                        player.stagedBet = parseInt(betInput.value);
+                        saveGameState();
+                    };
+                    bettingControls.appendChild(button);
+                });
+
+                // Reset Bet Staging Button
+                const resetBetButton = document.createElement('button');
+                resetBetButton.className = 'chip-btn bg-red-500 hover:bg-red-600 text-white font-bold py-2.5 px-4 rounded-md text-base';
+                resetBetButton.textContent = 'Reset';
+                resetBetButton.onclick = () => {
+                    betInput.value = 0;
+                    player.stagedBet = 0;
+                    saveGameState();
+                };
+                bettingControls.appendChild(resetBetButton);
+
+
+                // Action Buttons
+                const callButton = document.createElement('button');
+                callButton.className = 'chip-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-md text-base';
+                let callAmount = Math.max(0, highestCurrentBet - player.currentBet);
+                callButton.textContent = `Call (${callAmount})`;
+                callButton.onclick = () => callPlayer(index, callAmount);
+
+                const betRaiseButton = document.createElement('button');
+                betRaiseButton.className = 'chip-btn bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-4 rounded-md text-base';
+                betRaiseButton.textContent = 'Bet/Raise';
+                betRaiseButton.onclick = () => placeBet(index, parseInt(betInput.value || 0));
+
+                const allInButton = document.createElement('button');
+                allInButton.className = 'chip-btn bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 px-4 rounded-md text-base';
+                allInButton.textContent = 'All-In';
+                allInButton.onclick = () => allIn(index);
+
+                const foldButton = document.createElement('button');
+                foldButton.className = 'chip-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-2.5 px-4 rounded-md text-base';
+                foldButton.textContent = 'Fold';
+                foldButton.onclick = () => confirmFold(index); // Call confirmFold instead of foldPlayer directly
+
+                bettingControls.appendChild(betInput);
+                bettingControls.appendChild(callButton);
+                bettingControls.appendChild(betRaiseButton);
+                bettingControls.appendChild(allInButton);
+                bettingControls.appendChild(foldButton);
+
+                playerCard.appendChild(playerInfo);
+                playerCard.appendChild(playerCurrentBetDisplay);
+                playerCard.appendChild(bettingControls);
+
+                gamePlayerList.appendChild(playerCard);
+            });
+            saveGameState(); // Save state after rendering
+        }
+
+        /**
+         * Toggles visibility between setup and game screens.
+         */
+        function updateScreenVisibility() {
+            if (gameStarted) {
+                setupScreen.classList.add('hidden');
+                gameScreen.classList.remove('hidden');
+                renderGamePlayerList();
+            } else {
+                setupScreen.classList.remove('hidden');
+                gameScreen.classList.add('hidden');
+                renderSetupPlayerList();
+            }
+        }
+
+        // --- Player Management Functions ---
+
+        /**
+         * Adds a new player to the game.
+         */
+        function addPlayer() {
+            const name = playerNameInput.value.trim();
+            if (name) {
+                // New players start with chips from startingChipsInput, 0 currentBet, 0 stagedBet, not folded
+                players.push({ name: name, chips: startingChips, currentBet: 0, stagedBet: 0, folded: false });
+                playerNameInput.value = ''; // Clear input
+                renderSetupPlayerList();
+            }
+        }
+
+        // --- Game Action Functions ---
+
+        /**
+         * Handles a player placing a bet or raising.
+         * @param {number} index - Index of the player.
+         * @param {number} amount - The amount to bet/raise.
+         */
+        function placeBet(index, amount) {
+            if (players[index] && !players[index].folded) {
+                // Amount is the total new bet for this action, not just an increment
+                const currentBetForPlayer = players[index].currentBet;
+                const chipsToCommit = Math.max(0, amount - currentBetForPlayer); // Only commit new chips
+
+                if (chipsToCommit > players[index].chips) {
+                    // Player is trying to bet more than they have, go all-in instead
+                    allIn(index);
+                    return;
+                }
+
+                players[index].chips -= chipsToCommit;
+                players[index].currentBet += chipsToCommit;
+                players[index].stagedBet = 0; // Reset staged bet after committing
+                renderGamePlayerList();
+            }
+        }
+
+        /**
+         * Handles a player calling.
+         * @param {number} index - Index of the player.
+         * @param {number} callAmount - The calculated amount to call.
+         */
+        function callPlayer(index, callAmount) {
+            if (players[index] && !players[index].folded) {
+                const chipsToCommit = Math.min(callAmount, players[index].chips);
+                players[index].chips -= chipsToCommit;
+                players[index].currentBet += chipsToCommit;
+                players[index].stagedBet = 0; // Clear staged bet on call
+                renderGamePlayerList();
+            }
+        }
+
+        /**
+         * Handles a player going all-in.
+         * @param {number} index - Index of the player.
+         */
+        function allIn(index) {
+            if (players[index] && !players[index].folded) {
+                let allInAmount = players[index].chips;
+                players[index].chips = 0;
+                players[index].currentBet += allInAmount;
+                players[index].stagedBet = 0; // Clear staged bet on all-in
+                renderGamePlayerList();
+            }
+        }
+
+        /**
+         * Shows a confirmation before folding.
+         * @param {number} index - Index of the player.
+         */
+        async function confirmFold(index) {
+            const playerName = players[index].name;
+            const confirmed = await showConfirmation(`Are you sure ${playerName} wants to fold?`);
+            if (confirmed) {
+                foldPlayer(index);
+            }
+        }
+
+        /**
+         * Handles a player folding.
+         * @param {number} index - Index of the player.
+         */
+        function foldPlayer(index) {
+            if (players[index]) {
+                players[index].folded = true;
+                players[index].stagedBet = 0; // Clear staged bet on fold
+                renderGamePlayerList();
+            }
+        }
+
+        /**
+         * Ends the current round, which now directly leads to winner selection.
+         */
+        async function endRound() {
+            selectWinner();
+        }
+
+        /**
+         * Initiates the winner selection process.
+         */
+        function selectWinner() {
+            winnerOptions.innerHTML = ''; // Clear previous options
+            const eligiblePlayers = players.filter(p => p.chips > 0 || p.currentBet > 0 || p.folded);
+
+            if (eligiblePlayers.length === 0) {
+                showConfirmation("No players to select as winner. The pot is empty or all players are out. Restart game?").then(confirmed => {
+                    if (confirmed) {
+                        restartGame();
+                    }
+                });
+                return;
+            }
+
+            eligiblePlayers.forEach((player) => {
+                const winnerButton = document.createElement('button');
+                winnerButton.className = 'bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md text-sm';
+                winnerButton.textContent = player.name;
+                winnerButton.onclick = () => assignPotToWinner(player.name);
+                winnerOptions.appendChild(winnerButton);
+            });
+
+            winnerSelectionModal.classList.remove('hidden');
+        }
+
+        /**
+         * Assigns the total chips from the round to the selected winner and resets round state.
+         * @param {string} winnerName - The name of the winning player.
+         */
+        function assignPotToWinner(winnerName) {
+            winnerSelectionModal.classList.add('hidden');
+
+            let roundPot = 0;
+            // Calculate the total chips from current bets of ALL players (including folded ones)
+            players.forEach(player => {
+                roundPot += player.currentBet;
+            });
+
+            const winner = players.find(p => p.name === winnerName);
+            if (winner) {
+                winner.chips += roundPot;
+            }
+
+            // Reset for next round
+            players.forEach(player => {
+                player.currentBet = 0;
+                player.stagedBet = 0;
+                player.folded = false;
+            });
+            renderGamePlayerList();
+        }
+
+        // --- Game Flow Functions ---
+
+        /**
+         * Starts the poker game, transitioning to the game screen.
+         */
+        function startGame() {
+            const currentStartingChips = parseInt(startingChipsInput.value);
+            if (isNaN(currentStartingChips) || currentStartingChips <= 0) {
+                showConfirmation("Please enter a valid starting chip amount (must be a positive number).").then(() => {});
+                return;
+            }
+            startingChips = currentStartingChips; // Update global starting chips
+            saveGameState(); // Save updated starting chips
+
+            if (players.length < 2) {
+                showConfirmation("You need at least 2 players to start a game.").then(() => {});
+                return;
+            }
+
+            // Ensure all players have the correct starting chips when starting a new game
+            // This is important if starting chips were changed after adding players
+            players.forEach(player => {
+                player.chips = startingChips;
+                player.currentBet = 0;
+                player.stagedBet = 0;
+                player.folded = false;
+            });
+
+            gameStarted = true;
+            updateScreenVisibility();
+        }
+
+        /**
+         * Restarts the entire game, clearing all players and saved data, and returning to setup.
+         */
+        async function restartGame() {
+            const confirmed = await showConfirmation("Are you sure you want to restart the entire game? All player data will be lost.");
+            if (confirmed) {
+                localStorage.removeItem(STORAGE_KEY_PLAYERS);
+                localStorage.removeItem(STORAGE_KEY_GAME_STARTED);
+                localStorage.removeItem(STORAGE_KEY_STARTING_CHIPS);
+                players = [];
+                gameStarted = false; // Go back to setup screen
+                startingChips = 100; // Reset default starting chips
+                startingChipsInput.value = startingChips; // Update input field
+                updateScreenVisibility();
+            }
+        }
+
+        // --- Event Listeners ---
+        startingChipsInput.addEventListener('input', (event) => {
+            startingChips = parseInt(event.target.value) || 1; // Update startingChips on input
+            if (startingChips < 1) startingChips = 1; // Ensure non-negative
+            saveGameState(); // Save immediately
+        });
+        addPlayerButton.addEventListener('click', addPlayer);
+        playerNameInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                addPlayer();
+            }
+        });
+        startGameButton.addEventListener('click', startGame);
+        resetAllButton.addEventListener('click', restartGame);
+
+        // Game Screen Buttons
+        endRoundButton.addEventListener('click', endRound);
+        restartGameButton.addEventListener('click', restartGame);
+
+        // Modal close/cancel listeners
+        cancelWinnerSelection.addEventListener('click', () => {
+            winnerSelectionModal.classList.add('hidden');
+        });
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGameState();
+            updateScreenVisibility(); // Render the correct screen based on loaded state
+        });
+    </script>
+</body>
+</html>
